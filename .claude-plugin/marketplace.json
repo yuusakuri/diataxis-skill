@@ -1,0 +1,23 @@
+{
+  "name": "diataxis-skill",
+  "owner": { "name": "yuusakuri", "url": "https://github.com/yuusakuri" },
+  "metadata": {
+    "description": "The Diátaxis documentation skill",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "diataxis",
+      "source": "./",
+      "displayName": "Diátaxis",
+      "description": "Classify, scaffold, and audit documentation with the Diátaxis framework.",
+      "version": "1.0.0",
+      "author": { "name": "yuusakuri" },
+      "homepage": "https://github.com/yuusakuri/diataxis-skill",
+      "repository": "https://github.com/yuusakuri/diataxis-skill",
+      "license": "MIT",
+      "category": "documentation",
+      "keywords": ["documentation", "diataxis", "docs", "technical-writing"]
+    }
+  ]
+}
