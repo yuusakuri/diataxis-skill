@@ -25,6 +25,9 @@ The auditor counts four kinds of work a passage can be doing.
 Lines inside a code fence are not counted as prose.
 A fence is counted once, by its language.
 
+`explanation` and `teaching` are not counted on a table row.
+Both detect a register of prose, and a table cell is a label rather than discussion.
+
 ## When mode-mixing is reported
 
 Both conditions must hold:

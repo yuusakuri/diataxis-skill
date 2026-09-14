@@ -200,11 +200,13 @@ def profile_page(path: Path) -> PageProfile:
             counts["action"] += 1
             lines["action"].append(n)
 
+        is_table_row = bool(TABLE_ROW.match(line))
+
         if REFERENCE_TABLE_HEADER.match(line):
             table_is_reference = True
             counts["reference"] += 1
             lines["reference"].append(n)
-        elif TABLE_ROW.match(line):
+        elif is_table_row:
             if table_is_reference and not re.match(r"^\s*\|[\s:|-]+\|\s*$", line):
                 counts["reference"] += 1
                 lines["reference"].append(n)
@@ -215,13 +217,19 @@ def profile_page(path: Path) -> PageProfile:
             counts["reference"] += 1
             lines["reference"].append(n)
 
-        if EXPLANATION_WORD.search(line):
-            counts["explanation"] += 1
-            lines["explanation"].append(n)
+        # The word patterns below detect a register of prose: discussion,
+        # or a narrator addressing the reader. A table cell is a label or a
+        # short noun phrase, so a cell reading "architectural trade-offs" is
+        # naming a subject, not discussing one. Matching them inside a table
+        # reports the table's vocabulary as if it were the page's voice.
+        if not is_table_row:
+            if EXPLANATION_WORD.search(line):
+                counts["explanation"] += 1
+                lines["explanation"].append(n)
 
-        if TEACHING_PHRASE.search(line):
-            counts["teaching"] += 1
-            lines["teaching"].append(n)
+            if TEACHING_PHRASE.search(line):
+                counts["teaching"] += 1
+                lines["teaching"].append(n)
 
     return PageProfile(str(path), None, counts, lines)
 

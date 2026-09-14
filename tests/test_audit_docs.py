@@ -136,6 +136,60 @@ class TestSignalDetection(unittest.TestCase):
                              "Historically the rationale was different.\n")
         self.assertGreaterEqual(prof.counts["explanation"], 2)
 
+    def test_reasoning_words_in_a_table_cell_are_not_explanation(self):
+        """A cell naming a subject is not the page discussing it.
+
+        A catalogue table listing "architectural trade-offs" as one skill's
+        role, or "Alternative TDD walkthrough" as another's, is reference
+        material. Counting those cells as explanation reported the table's
+        vocabulary as the page's voice, and flagged correct reference pages.
+        """
+        prof = self._profile(
+            "| Skill | Role |\n"
+            "|---|---|\n"
+            "| senior-architect | System design and architectural trade-offs |\n"
+            "| tdd-guide | Alternative TDD walkthrough |\n"
+            "| adr | Record the rationale behind a decision |\n")
+        self.assertEqual(prof.counts["explanation"], 0,
+                         "table cells are labels, not discussion")
+
+    def test_teaching_words_in_a_table_cell_are_not_teaching(self):
+        prof = self._profile(
+            "| Page | Promise |\n"
+            "|---|---|\n"
+            "| intro | you will learn the basics |\n"
+            "| setup | by the end the server runs |\n"
+            "| tour | in this tutorial we cover the UI |\n")
+        self.assertEqual(prof.counts["teaching"], 0,
+                         "table cells are labels, not narration")
+
+    def test_reasoning_words_outside_a_table_still_count(self):
+        """The narrower rule must not silence the signal it was built for."""
+        prof = self._profile(
+            "| Skill | Role |\n"
+            "|---|---|\n"
+            "| senior-architect | System design and architectural trade-offs |\n"
+            "\n"
+            "We chose this because the alternative loses the rationale.\n")
+        self.assertEqual(prof.counts["explanation"], 1)
+
+    def test_a_reference_page_listing_skills_is_not_flagged(self):
+        """End to end: the shape that produced the false positive."""
+        with tempfile.TemporaryDirectory() as tmp:
+            ref = Path(tmp) / "reference"
+            ref.mkdir()
+            rows = "\n".join(
+                f"| skill-{i} | Weigh the trade-offs, or an alternative |"
+                for i in range(8))
+            (ref / "catalog.md").write_text(
+                "# Catalog\n\n| Skill | Role |\n|---|---|\n" + rows + "\n",
+                encoding="utf-8")
+            findings, _, _ = audit_docs.audit(Path(tmp))
+            mixing = [f for f in findings if f.kind == "mode-mixing"]
+            self.assertEqual(mixing, [],
+                             "a catalogue of skills is reference, whatever "
+                             "the cells happen to say")
+
     def test_shell_fence_counts_as_action(self):
         prof = self._profile("```bash\nnpm install\n```\n")
         self.assertEqual(prof.counts["action"], 1)
