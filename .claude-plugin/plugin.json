@@ -1,0 +1,11 @@
+{
+  "name": "diataxis",
+  "displayName": "Diátaxis",
+  "version": "1.0.0",
+  "description": "Organise documentation with the Diátaxis framework: classify pages into tutorial, how-to, reference, or explanation, scaffold a docs tree, and audit existing docs for mode-mixing.",
+  "author": { "name": "yuusakuri", "url": "https://github.com/yuusakuri" },
+  "homepage": "https://github.com/yuusakuri/diataxis-skill",
+  "repository": "https://github.com/yuusakuri/diataxis-skill",
+  "license": "MIT",
+  "keywords": ["documentation", "diataxis", "docs", "information-architecture", "technical-writing"]
+}
