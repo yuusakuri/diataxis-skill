@@ -9,7 +9,7 @@
 
 ## Variations
 
-- **If <common situation>:** <what to do instead>
+- If <common situation>: <what to do instead>
 
 ## If it fails
 

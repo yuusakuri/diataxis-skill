@@ -16,7 +16,7 @@ another. `SKILL.md` has the compass; this has the detail and worked examples.
 
 ## Tutorial
 
-**The reader is a beginner who does not yet know what they need to know.** They cannot
+The reader is a beginner who does not yet know what they need to know. They cannot
 tell you what they want, because they do not know the vocabulary yet. Your job is to
 give them an experience of success.
 
@@ -35,7 +35,7 @@ should have very few. One that works beats five that rot.
 
 ## How-to guide
 
-**The reader is competent and at work.** They have a goal and a real, messy situation.
+The reader is competent and at work. They have a goal and a real, messy situation.
 
 - Titled by the goal: "How to restore a backup to a new region."
 - Starts at the problem, not the tool. The machinery is means, not subject.
@@ -51,7 +51,7 @@ problem.
 
 ## Reference
 
-**The reader is mid-task and needs a fact.** They arrive, take one thing, and leave.
+The reader is mid-task and needs a fact. They arrive, take one thing, and leave.
 
 - Describe the machinery. State what is. Never instruct.
 - Structure it to mirror the thing described, so a reader can predict where to look.
@@ -64,7 +64,7 @@ problem.
 
 ## Explanation
 
-**The reader is trying to understand, probably not at the keyboard.**
+The reader is trying to understand, probably not at the keyboard.
 
 - Bound it with a question or topic: "Why deployments are immutable", "How caching and
   invalidation fit together."
@@ -93,7 +93,7 @@ nobody recorded.
 
 ## Before and after
 
-**Before** — one file, `docs/caching.md`, doing four jobs:
+Before — one file, `docs/caching.md`, doing four jobs:
 
 ```markdown
 # Caching
@@ -104,7 +104,7 @@ To enable caching: 1. set CACHE=1  2. restart the workers        <- how-to
 In this guide you will build your first cached endpoint...        <- tutorial
 ```
 
-**After** — four files, each with one reader in mind:
+After — four files, each with one reader in mind:
 
 ```
 docs/explanation/why-we-cache.md      why it exists, what was rejected and why
