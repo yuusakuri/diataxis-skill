@@ -7,10 +7,10 @@ Diátaxis sorts documentation by what the reader needs when they arrive:
 
 | The content informs… | …and serves… | …so it is a |
 |---|---|---|
-| action (doing) | acquisition of skill (studying) | **tutorial** |
-| action (doing) | application of skill (working) | **how-to guide** |
-| cognition (thinking) | application of skill (working) | **reference** |
-| cognition (thinking) | acquisition of skill (studying) | **explanation** |
+| action (doing) | acquisition of skill (studying) | tutorial |
+| action (doing) | application of skill (working) | how-to guide |
+| cognition (thinking) | application of skill (working) | reference |
+| cognition (thinking) | acquisition of skill (studying) | explanation |
 
 The skill applies that split: it decides where a page belongs, sets up a docs
 tree, and finds pages that are doing two jobs at once.
