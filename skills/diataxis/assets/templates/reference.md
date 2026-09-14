@@ -1,6 +1,7 @@
 # <Thing> reference
 
-<One sentence stating what this describes. No instruction.>
+<One sentence stating what this describes.
+No instruction.>
 
 ## <Entry>
 
@@ -8,4 +9,5 @@
 |---|---|---|---|
 | `<name>` | `<type>` | `<default>` | <what it is> |
 
-<Repeat with identical shape for every entry. Consistency is the feature.>
+<Repeat with identical shape for every entry.
+Consistency is the feature.>

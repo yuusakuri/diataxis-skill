@@ -8,12 +8,14 @@
 
 ## <The reasoning>
 
-<Discussion. Why this way. What constrains it.>
+<Discussion.
+Why this way.
+What constrains it.>
 
 ## Alternatives considered
 
-<What else was possible, and why it was not chosen. Being honest here is what makes
-this explanation rather than marketing.>
+<What else was possible, and why it was not chosen.
+Being honest here is what makes this explanation rather than marketing.>
 
 ## See also
 

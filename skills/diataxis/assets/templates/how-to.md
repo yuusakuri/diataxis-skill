@@ -1,6 +1,7 @@
 # How to <achieve the reader's goal>
 
-<One sentence: what situation this solves. Assume the reader knows why they want it.>
+<One sentence: what situation this solves.
+Assume the reader knows why they want it.>
 
 ## Steps
 
