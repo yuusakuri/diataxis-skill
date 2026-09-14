@@ -1,7 +1,7 @@
 # Findings reference
 
-Every finding has a `kind`, a `severity`, and a `path`. Mode-mixing findings
-also carry `mode` (the page's own mode) and `intruder` (the foreign one).
+Every finding has a `kind`, a `severity`, and a `path`.
+Mode-mixing findings also carry `mode` (the page's own mode) and `intruder` (the foreign one).
 
 ## Finding kinds
 
@@ -22,21 +22,22 @@ The auditor counts four kinds of work a passage can be doing.
 | `explanation` | Words that mark reasoning: why, because, rationale, trade-off, historically, alternative |
 | `teaching` | Phrases that address a learner: "in this tutorial", "you will learn", "by the end", "congratulations" |
 
-Lines inside a code fence are not counted as prose. A fence is counted once, by
-its language.
+Lines inside a code fence are not counted as prose.
+A fence is counted once, by its language.
 
 ## When mode-mixing is reported
 
 Both conditions must hold:
 
-1. The page has at least 3 foreign signals. Fewer is a passing mention,
-   which every mode is allowed.
+1. The page has at least 3 foreign signals.
+   Fewer is a passing mention, which every mode is allowed.
 2. The page's own signal count is less than twice the foreign count.
    A strongly native page is allowed incidental foreign material.
 
 ## Which pairs are checked
 
-Not every combination is a problem. These are:
+Not every combination is a problem.
+These are:
 
 | Page mode | Foreign signal | Why it matters |
 |---|---|---|
@@ -50,5 +51,6 @@ Not every combination is a problem. These are:
 
 ## Limits
 
-The auditor matches the shape of prose. It cannot read meaning, so it produces
-candidates, not verdicts. Check the cited lines before acting.
+The auditor matches the shape of prose.
+It cannot read meaning, so it produces candidates, not verdicts.
+Check the cited lines before acting.

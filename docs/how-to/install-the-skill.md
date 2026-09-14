@@ -9,8 +9,8 @@
 
 ## Any agent, by copying the folder
 
-The skill is a plain [Agent Skills](https://agentskills.io/specification)
-directory. Copy it into the directory your agent reads:
+The skill is a plain [Agent Skills](https://agentskills.io/specification) directory.
+Copy it into the directory your agent reads:
 
 ```bash
 git clone https://github.com/yuusakuri/diataxis-skill
@@ -23,13 +23,12 @@ cp -r diataxis-skill/skills/diataxis <target>/
 | Codex, Gemini CLI, OpenCode, Copilot | `.agents/skills/` |
 | Cursor | `.cursor/skills/` |
 
-Claude Code reads only `.claude/skills/`. If you install for several agents,
-write both directories.
+Claude Code reads only `.claude/skills/`.
+If you install for several agents, write both directories.
 
 ## Check it worked
 
-Ask the agent: *"our docs folder is a mess, where should things go?"* It should
-answer in terms of tutorials, how-to guides, reference and explanation.
+Ask the agent: *"our docs folder is a mess, where should things go?"* It should answer in terms of tutorials, how-to guides, reference and explanation.
 
-If it does not, the skill is not loaded. Restart the session, and check the
-folder you copied into contains `diataxis/SKILL.md`.
+If it does not, the skill is not loaded.
+Restart the session, and check the folder you copied into contains `diataxis/SKILL.md`.

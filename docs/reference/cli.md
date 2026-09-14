@@ -1,7 +1,6 @@
 # `audit_docs.py` reference
 
-Scans a documentation tree and reports pages that sit outside the four Diátaxis
-modes, or that carry material from a mode they do not belong to.
+Scans a documentation tree and reports pages that sit outside the four Diátaxis modes, or that carry material from a mode they do not belong to.
 
 ```
 python3 audit_docs.py ROOT [--json] [--strict]
@@ -75,4 +74,5 @@ A page takes the mode of the first recognised directory in its path.
 
 ## Requirements
 
-Python 3.9 or later. No third-party packages.
+Python 3.9 or later.
+No third-party packages.
