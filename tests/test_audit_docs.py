@@ -107,6 +107,54 @@ class TestFlatTree(unittest.TestCase):
         self.assertEqual(modes, {"tutorial", "how-to", "reference", "explanation"})
 
 
+class TestDeferredDocuments(unittest.TestCase):
+    """Documents whose shape is fixed by their purpose.
+
+    SKILL.md says an ADR, a PRD, an RFC, a runbook or a changelog must not be
+    forced into the four modes. The auditor used to tell their authors to
+    "move it under the matching mode" — the one instruction the skill exists
+    to prevent.
+    """
+
+    @staticmethod
+    def _tree(tmp, dirs):
+        for d in dirs:
+            (Path(tmp) / d).mkdir(parents=True, exist_ok=True)
+            (Path(tmp) / d / "doc.md").write_text(f"# {d}\n", encoding="utf-8")
+        return audit_docs.audit(Path(tmp))
+
+    def test_a_specification_is_not_asked_to_move(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            findings, _, summary = self._tree(tmp, ["spec"])
+            self.assertEqual([f for f in findings if f.kind == "unclassified"], [])
+            self.assertEqual(summary["deferred"], 1)
+
+    def test_the_directories_dev_skills_creates_are_all_deferred(self):
+        """The curated skills write here; the auditor must not fight them."""
+        dirs = ["tutorials", "how-to", "reference", "explanation",
+                "requirements", "decisions", "security", "postmortems",
+                "runbooks"]
+        with tempfile.TemporaryDirectory() as tmp:
+            findings, _, summary = self._tree(tmp, dirs)
+            self.assertEqual([f for f in findings if f.kind == "unclassified"], [])
+            self.assertEqual(summary["deferred"], 5)
+
+    def test_a_mode_directory_wins_over_a_deferred_name(self):
+        """A how-to about security is still a how-to."""
+        with tempfile.TemporaryDirectory() as tmp:
+            _, profiles, summary = self._tree(tmp, ["how-to/security"])
+            self.assertEqual(summary["deferred"], 0)
+            self.assertEqual(profiles[0].mode, "how-to")
+
+    def test_an_unrecognised_directory_is_still_reported(self):
+        """Deferral must not become a blanket amnesty."""
+        with tempfile.TemporaryDirectory() as tmp:
+            findings, _, summary = self._tree(tmp, ["misc"])
+            paths = {f.path for f in findings if f.kind == "unclassified"}
+            self.assertEqual(paths, {"misc/doc.md"})
+            self.assertEqual(summary["deferred"], 0)
+
+
 class TestSignalDetection(unittest.TestCase):
     """The heuristics must fire on what they claim to detect."""
 

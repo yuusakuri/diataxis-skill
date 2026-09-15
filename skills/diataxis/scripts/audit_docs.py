@@ -48,6 +48,22 @@ MODE_DIRS = {
 
 MODE_OF_DIR = {d: mode for mode, dirs in MODE_DIRS.items() for d in dirs}
 
+# Directories holding documents whose structure is fixed by their purpose.
+# SKILL.md defers on these: an ADR, a PRD, an RFC, a runbook, a changelog have
+# their own shapes and must not be forced into the four modes. Telling an
+# author to move a requirements specification "under the matching mode" is the
+# one instruction this skill exists to prevent.
+DEFERRED_DIRS = {
+    "adr", "adrs", "decisions", "decision-records",
+    "spec", "specs", "specification", "specifications",
+    "requirements", "prd", "prds",
+    "rfc", "rfcs",
+    "runbook", "runbooks",
+    "postmortem", "postmortems", "incidents",
+    "changelog", "changelogs", "releases",
+    "security", "compliance", "policies",
+}
+
 # Files that describe the tree rather than sitting inside a mode.
 INDEX_NAMES = {"index.md", "readme.md", "index.rst", "readme.rst", "_index.md"}
 
@@ -158,6 +174,11 @@ def classify_dir(parts: tuple[str, ...]) -> str | None:
     return None
 
 
+def is_deferred(parts: tuple[str, ...]) -> bool:
+    """True if the path sits in a directory this skill does not govern."""
+    return any(part.lower() in DEFERRED_DIRS for part in parts)
+
+
 def profile_page(path: Path) -> PageProfile:
     """Count the kinds of work a page is doing, remembering where."""
     counts = {k: 0 for k in SIGNAL_KINDS}
@@ -246,10 +267,18 @@ def audit(root: Path) -> tuple[list[Finding], list[PageProfile], dict]:
 
     modes_present: set[str] = set()
     unclassified: list[Path] = []
+    deferred: list[Path] = []
 
     for page in pages:
         rel = page.relative_to(root)
         mode = classify_dir(rel.parts[:-1])
+
+        # A mode directory wins: a how-to about security is still a how-to.
+        # Deferral applies only to pages that sit in no mode at all.
+        if mode is None and is_deferred(rel.parts[:-1]):
+            deferred.append(rel)
+            continue
+
         prof = profile_page(page)
         prof.path = str(rel)
         prof.mode = mode
@@ -320,6 +349,8 @@ def audit(root: Path) -> tuple[list[Finding], list[PageProfile], dict]:
         "pages": len(profiles),
         "modes_present": sorted(modes_present),
         "unclassified": len(unclassified),
+        "deferred": len(deferred),
+        "deferred_paths": [str(r) for r in deferred],
         "findings": len(findings),
     }
     return findings, profiles, summary
@@ -329,6 +360,9 @@ def render(findings: list[Finding], summary: dict, root: Path) -> str:
     out = [f"Diátaxis audit: {root}", ""]
     out.append(f"{summary['pages']} pages, "
                f"modes present: {', '.join(summary['modes_present']) or 'none'}")
+    if summary.get("deferred"):
+        out.append(f"{summary['deferred']} page(s) not examined: their shape is "
+                   f"fixed by their purpose, not by a reader's need.")
     out.append("")
 
     if not findings:

@@ -25,6 +25,16 @@ The auditor counts four kinds of work a passage can be doing.
 Lines inside a code fence are not counted as prose.
 A fence is counted once, by its language.
 
+## Directories the auditor does not examine
+
+Documents whose structure is fixed by their purpose are skipped, not classified.
+Forcing an ADR or a requirements specification into one of the four modes destroys what makes it useful, so the auditor never asks for it.
+
+`adr` `adrs` `decisions` `decision-records` `spec` `specs` `specification` `specifications` `requirements` `prd` `prds` `rfc` `rfcs` `runbook` `runbooks` `postmortem` `postmortems` `incidents` `changelog` `changelogs` `releases` `security` `compliance` `policies`
+
+A mode directory wins over these: a page under `how-to/security/` is a how-to and is examined as one.
+The run reports how many pages were skipped.
+
 ## When mode-mixing is reported
 
 Both conditions must hold:
