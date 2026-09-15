@@ -35,7 +35,7 @@ A style guide that says "write clearly" gives nobody a way to settle where a pag
 
 It is diagnostic.
 Because the modes have different shapes, you can see when a page is mixed: a reference page with a "Step 1" in it, an explanation that ends in a numbered list.
-That is what the auditor in this repository looks for.
+That is the failure this skill is aimed at.
 
 ## What it does not cover
 

@@ -44,20 +44,12 @@ Split it and link the halves — that is the answer, not a compromise.
 
 ## Working with an existing docs tree
 
-Run the auditor first.
-It finds pages that sit outside any mode and pages doing two jobs at once, with line numbers:
+Read the pages before proposing anything.
+For each one, name the reader it serves and what they were doing when they opened it.
+A page you cannot answer that for is the page to look at first.
 
-```bash
-python3 scripts/audit_docs.py docs/
-python3 scripts/audit_docs.py docs/ --json      # machine-readable
-python3 scripts/audit_docs.py docs/ --strict    # exit 1 on any finding, for CI
-```
-
-Treat its output as questions, not verdicts.
-It detects the shape of prose, and shape is only evidence.
-A reference page may legitimately carry one worked example; a tutorial may legitimately name three options.
-Read each flagged line and decide using the compass.
-The tool exists to direct your attention, not to replace the judgement — tell the user when you disagree with a finding and why.
+Say which lines led you to each conclusion, so the author can disagree with the evidence rather than with you.
+Judgements about what a reader needs are yours to make and to defend; do not present them as measurements.
 
 Then, for each finding:
 
@@ -111,7 +103,7 @@ If that sentence is hard to write, stop — the page is not yet one thing.
 
 ## A note on this skill's own files
 
-The bundle uses the directory names the Agent Skills spec defines — `references/`, `scripts/`, `assets/` — so they are not mode names.
+The bundle uses the directory names the Agent Skills spec defines — `references/`, `assets/` — so they are not mode names.
 The files inside are named by mode instead: `four-modes.md` is reference, `how-to-restructure.md` is a how-to.
 
 ## Where this skill defers

@@ -37,25 +37,14 @@ See [install the skill](docs/how-to/install-the-skill.md).
 The skill triggers on questions of documentation structure, whether or not Diátaxis is named.
 Ask an agent where a page belongs, or why a docs folder is hard to navigate.
 
-It also ships an auditor you can run directly:
-
-```bash
-python3 skills/diataxis/scripts/audit_docs.py docs/
-```
-
-It reports pages outside any mode, and pages carrying material from a mode they do not belong to, with line numbers.
-Findings are candidates, not verdicts: the tool reads the shape of prose, not its meaning.
-
 ## Documentation
 
 [`docs/`](docs/) is organised by Diátaxis, so the framework is visible in the directory names.
 
 | | |
 |---|---|
-| [Tutorial](docs/tutorials/audit-your-first-docs-tree.md) | Run the auditor for the first time |
-| [How-to](docs/how-to/) | Install the skill, run the auditor in CI |
-| [Reference](docs/reference/) | Command options, finding types |
-| [Explanation](docs/explanation/) | Why Diátaxis, what the skill adds |
+| [How-to](docs/how-to/install-the-skill.md) | Install the skill |
+| [Explanation](docs/explanation/why-diataxis.md) | Why Diátaxis, and what it does not cover |
 
 ## Contributing
 
