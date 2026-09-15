@@ -5,8 +5,8 @@ So the aim is a sequence of small safe moves, not a flag day.
 
 ## Order of work
 
-1. Audit before touching anything.
-   `python3 scripts/audit_docs.py docs/ --json > /tmp/audit.json` Record the starting state so you can show what changed.
+1. Write down the starting state before touching anything.
+   List every page and the mode you judge it to be, so you can show what changed and why.
 
 2. Create the four directories and an index, and stop.
    Commit that alone.
@@ -20,9 +20,9 @@ So the aim is a sequence of small safe moves, not a flag day.
    For each: create the new pages, move the material, leave the original as a stub linking to its parts if anything links to it.
    Splitting is where content gets silently lost; do one page per commit and re-read the diff.
 
-5. Re-run the audit.
-   The findings should have gone down.
-   If a new one appeared, you moved something into the wrong mode.
+5. Re-read the list from step 1.
+   Every page should now sit where you said it belonged.
+   A page you are still unsure about is one you split in the wrong place.
 
 ## Keeping links alive
 
