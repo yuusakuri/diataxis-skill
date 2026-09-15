@@ -49,8 +49,9 @@ class TestCleanTree(unittest.TestCase):
         self.assertEqual(findings_of("clean", "mode-mixing"), [],
                          "a correct tree must not be flagged, or the tool is noise")
 
-    def test_no_unclassified_pages(self):
-        self.assertEqual(findings_of("clean", "unclassified"), [])
+    def test_no_pages_sit_outside_a_mode(self):
+        _, _, summary = audit_fixture("clean")
+        self.assertEqual(summary["outside_modes"], 0)
 
     def test_all_four_modes_detected(self):
         _, _, summary = audit_fixture("clean")
@@ -93,18 +94,72 @@ class TestModeMixing(unittest.TestCase):
 class TestFlatTree(unittest.TestCase):
     """Docs with no mode structure at all."""
 
-    def test_pages_outside_any_mode_are_reported(self):
-        paths = {f.path for f in findings_of("flat", "unclassified")}
-        self.assertEqual(paths, {"install.md", "api.md"})
+    def test_a_page_outside_a_mode_is_not_a_finding(self):
+        """The tool has no opinion on folder names it does not recognise."""
+        findings, _, _ = audit_fixture("flat")
+        self.assertEqual([f for f in findings if f.severity == "warning"], [],
+                         "an unrecognised directory is not a defect")
 
-    def test_index_files_are_not_treated_as_unclassified(self):
-        paths = {f.path for f in findings_of("flat", "unclassified")}
-        self.assertNotIn("README.md", paths,
-                         "a landing page describes the tree; it is not misfiled")
+    def test_pages_outside_a_mode_are_counted(self):
+        _, _, summary = audit_fixture("flat")
+        self.assertEqual(summary["outside_modes"], 2)
+        self.assertEqual(set(summary["outside_mode_paths"]),
+                         {"install.md", "api.md"})
+
+    def test_a_landing_page_is_not_counted_as_outside(self):
+        _, _, summary = audit_fixture("flat")
+        self.assertNotIn("README.md", summary["outside_mode_paths"],
+                         "a landing page describes the tree")
 
     def test_all_four_modes_reported_missing(self):
         modes = {f.mode for f in findings_of("flat", "missing-mode")}
         self.assertEqual(modes, {"tutorial", "how-to", "reference", "explanation"})
+
+
+class TestFolderNamesAreNotJudged(unittest.TestCase):
+    """The tool answers about pages, not about a project's folder vocabulary.
+
+    A docs tree carries more than this framework governs: specifications,
+    decision records, runbooks, translations, per-version trees. Naming those
+    a defect turns the tool into an argument about folder names.
+    """
+
+    @staticmethod
+    def _tree(tmp, dirs):
+        for d in dirs:
+            (Path(tmp) / d).mkdir(parents=True, exist_ok=True)
+            (Path(tmp) / d / "doc.md").write_text(f"# {d}\n", encoding="utf-8")
+        return audit_docs.audit(Path(tmp))
+
+    def test_any_extra_directory_is_left_alone(self):
+        dirs = ["tutorials", "how-to", "reference", "explanation",
+                "spec", "decisions", "runbooks", "faq", "ja", "v2", "misc"]
+        with tempfile.TemporaryDirectory() as tmp:
+            findings, _, summary = self._tree(tmp, dirs)
+            self.assertEqual([f for f in findings if f.severity == "warning"], [])
+            self.assertEqual(summary["outside_modes"], 7)
+
+    def test_pages_inside_a_mode_are_still_examined(self):
+        """Loosening the folder check must not silence the content check."""
+        with tempfile.TemporaryDirectory() as tmp:
+            ref = Path(tmp) / "reference"
+            ref.mkdir()
+            (ref / "cli.md").write_text(
+                "# CLI\n\n## Step 1: install\n\n"
+                "1. Run the installer\n2. Open the config\n3. Edit the port\n",
+                encoding="utf-8")
+            findings, _, _ = audit_docs.audit(Path(tmp))
+            kinds = {f.kind for f in findings}
+            self.assertIn("mode-mixing", kinds)
+
+    def test_strict_does_not_fail_on_info_alone(self):
+        """A missing mode is an observation, not a build failure."""
+        proc = run_cli(str(FIXTURES / "flat"), "--strict")
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    def test_strict_still_fails_on_a_warning(self):
+        proc = run_cli(str(FIXTURES / "mixed"), "--strict")
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
 
 
 class TestSignalDetection(unittest.TestCase):

@@ -7,9 +7,12 @@ Mode-mixing findings also carry `mode` (the page's own mode) and `intruder` (the
 
 | Kind | Severity | Meaning |
 |---|---|---|
-| `unclassified` | warning | The page is not inside a mode directory. Index and README files are exempt. |
 | `missing-mode` | info | No page anywhere uses this mode. |
 | `mode-mixing` | warning | The page carries enough material from another mode to hinder its reader. |
+
+A page outside the mode directories is not examined and produces no finding.
+The run reports how many there were.
+Index and README files are not counted.
 
 ## Signals
 
@@ -24,6 +27,11 @@ The auditor counts four kinds of work a passage can be doing.
 
 Lines inside a code fence are not counted as prose.
 A fence is counted once, by its language.
+
+## Exit codes with `--strict`
+
+`--strict` exits 1 when a warning was reported, and 0 otherwise.
+An `info` finding does not fail the run.
 
 ## When mode-mixing is reported
 

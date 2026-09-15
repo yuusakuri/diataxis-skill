@@ -17,14 +17,14 @@ python3 audit_docs.py ROOT [--json] [--strict]
 | Option | Description |
 |---|---|
 | `--json` | Print machine-readable output: summary, findings, and per-page signal counts. |
-| `--strict` | Exit 1 if there is any finding. For CI. |
+| `--strict` | Exit 1 if a warning was reported. An `info` finding does not fail the run. For CI. |
 
 ## Exit codes
 
 | Code | Meaning |
 |---|---|
-| 0 | Completed. With `--strict`, also means no findings. |
-| 1 | With `--strict`, at least one finding. |
+| 0 | Completed. With `--strict`, also means no warnings. |
+| 1 | With `--strict`, at least one warning. |
 | 2 | `ROOT` is not a directory. |
 
 ## Files scanned
@@ -50,7 +50,8 @@ A page takes the mode of the first recognised directory in its path.
   "summary": {
     "pages": 4,
     "modes_present": ["explanation", "how-to", "reference", "tutorial"],
-    "unclassified": 0,
+    "outside_modes": 0,
+    "outside_mode_paths": [],
     "findings": 1
   },
   "findings": [

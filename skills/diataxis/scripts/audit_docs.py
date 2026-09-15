@@ -22,7 +22,7 @@ question to answer, not a verdict to obey.
 Usage:
     python3 audit_docs.py docs/
     python3 audit_docs.py docs/ --json
-    python3 audit_docs.py docs/ --strict      # exit 1 if any finding
+    python3 audit_docs.py docs/ --strict      # exit 1 if any warning
 
 No third-party dependencies.
 """
@@ -245,7 +245,7 @@ def audit(root: Path) -> tuple[list[Finding], list[PageProfile], dict]:
     )
 
     modes_present: set[str] = set()
-    unclassified: list[Path] = []
+    outside: list[Path] = []
 
     for page in pages:
         rel = page.relative_to(root)
@@ -258,19 +258,15 @@ def audit(root: Path) -> tuple[list[Finding], list[PageProfile], dict]:
         if mode:
             modes_present.add(mode)
         elif rel.name.lower() not in INDEX_NAMES:
-            unclassified.append(rel)
+            outside.append(rel)
 
     # --- structural findings ---
-    for rel in unclassified:
-        findings.append(Finding(
-            kind="unclassified",
-            severity="warning",
-            path=str(rel),
-            mode=None,
-            message=("Not inside a Diátaxis mode directory. Decide what the "
-                     "reader needs from it — action or cognition, study or "
-                     "work — and move it under the matching mode."),
-        ))
+    # A page outside the mode directories is not examined and not reported.
+    # The tool cannot know what a directory is for, and a project's docs tree
+    # answers to more than this framework: specifications, decision records,
+    # runbooks, translations, per-version trees. Naming those a defect would
+    # make the tool an argument about folder names rather than about whether
+    # a page serves its reader. The count is in the summary.
 
     for mode in ("tutorial", "how-to", "reference", "explanation"):
         if mode not in modes_present:
@@ -319,7 +315,8 @@ def audit(root: Path) -> tuple[list[Finding], list[PageProfile], dict]:
     summary = {
         "pages": len(profiles),
         "modes_present": sorted(modes_present),
-        "unclassified": len(unclassified),
+        "outside_modes": len(outside),
+        "outside_mode_paths": [str(r) for r in outside],
         "findings": len(findings),
     }
     return findings, profiles, summary
@@ -329,6 +326,9 @@ def render(findings: list[Finding], summary: dict, root: Path) -> str:
     out = [f"Diátaxis audit: {root}", ""]
     out.append(f"{summary['pages']} pages, "
                f"modes present: {', '.join(summary['modes_present']) or 'none'}")
+    if summary.get("outside_modes"):
+        out.append(f"{summary['outside_modes']} page(s) outside the mode "
+                   f"directories, not examined.")
     out.append("")
 
     if not findings:
@@ -376,7 +376,7 @@ def main() -> int:
     else:
         print(render(findings, summary, root))
 
-    if args.strict and findings:
+    if args.strict and any(f.severity == "warning" for f in findings):
         return 1
     return 0
 
