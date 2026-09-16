@@ -1,40 +1,40 @@
-# How to install the skill
+# スキルのインストール方法
 
-The skill is a plain [Agent Skills](https://agentskills.io/specification) directory.
-Installing it means putting that directory where your agent looks.
+このスキルは[Agent Skills](https://agentskills.io/specification)の形式に従ったただのディレクトリである。
+インストールとは、そのディレクトリをエージェントが読む場所に置くことを指す。
 
-## Copy the folder
+## フォルダをコピーする
 
 ```bash
 git clone https://github.com/yuusakuri/diataxis-skill
 cp -r diataxis-skill/skills/diataxis <target>/
 ```
 
-`<target>` is the directory your agent reads.
+`<target>`は、使っているエージェントが読むディレクトリである。
 
-| Target | Read by |
-|---|---|
-| `.agents/skills/` | Codex, Gemini CLI, OpenCode, Copilot, CommandCode |
+| 置き場所 | 読むエージェント |
+| --- | --- |
+| `.agents/skills/` | Codex、Gemini CLI、OpenCode、Copilot、CommandCode |
 | `.claude/skills/` | Claude Code |
 | `.cursor/skills/` | Cursor |
 
-`.agents/skills/` is the shared convention.
-Claude Code and Cursor do not read it, so write their directories too if you use them.
+`.agents/skills/`が共通の置き場である。
+Claude CodeとCursorはここを読まないので、これらを使う場合はそれぞれのディレクトリにも書き込む。
 
-## Install as a plugin
+## プラグインとして入れる
 
-Agents with a plugin system can fetch the skill instead of copying it.
-In Claude Code:
+プラグイン機構を持つエージェントなら、コピーせずに取得できる。
+Claude Codeの場合は次のとおり。
 
 ```bash
 /plugin marketplace add yuusakuri/diataxis-skill
 /plugin install diataxis@diataxis-skill
 ```
 
-## Check it worked
+## 動作を確認する
 
-Ask the agent: *"our docs folder is a mess, where should things go?"*
-It should answer in terms of tutorials, how-to guides, reference and explanation.
+エージェントに「docsフォルダがぐちゃぐちゃなんだけど、どう置くべき？」と尋ねる。
+チュートリアル、ハウツーガイド、リファレンス、説明という言葉で答えが返るはずである。
 
-If it does not, the skill is not loaded.
-Restart the session, and check the directory you copied into contains `diataxis/SKILL.md`.
+返らない場合、スキルが読み込まれていない。
+セッションを再起動し、コピー先のディレクトリに`diataxis/SKILL.md`があることを確認する。

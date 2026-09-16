@@ -1,35 +1,38 @@
-# Evaluations
+# 評価
 
-These check whether an agent loaded with the skill does what the skill says.
-Each assertion states a behaviour `SKILL.md` asks for.
-A failing assertion is a gap between the skill and what the agent did.
+スキルを読み込んだエージェントが、スキルの言うとおりに振る舞うかを確認する。
+各判定は`SKILL.md`が求める挙動を1つずつ述べたものである。
+判定の失敗は、スキルとエージェントの実際の動作との差を意味する。
 
-## Running
+## 実行する
 
-1. Load `skills/diataxis/` into an agent that has not read this repository.
-2. Give it the prompt from `evals.json`, with the fixture directory named in `files` as its working material.
-3. Save the answer as `<runs>/<eval-name>/outputs/answer.md`.
-4. Grade:
+1. このリポジトリを読んでいないエージェントに`skills/diataxis/`を読み込ませる。
+2. `evals.json`のプロンプトを与える。`files`に書かれた入力ディレクトリを作業対象にする。
+3. 答えを`<runs>/<eval-name>/outputs/answer.md`に保存する。
+4. 採点する。
 
 ```bash
 python3 evals/results/grade.py <runs>
 ```
 
-The runs directory defaults to `evals/runs`, or set `DIATAXIS_EVAL_RUNS`.
-Exit is 0 only when every assertion passes and every eval has an answer.
+結果の置き場は既定で`evals/runs`。`DIATAXIS_EVAL_RUNS`でも指定できる。
+すべての判定が通り、かつすべてのevalに答えがある場合だけ、終了コードが0になる。
 
-## What is here
+## 構成
 
-| File | Contents |
-|---|---|
-| `evals.json` | The prompts and what each one is looking for |
-| `fixtures/` | The docs trees the prompts operate on |
-| `results/grade.py` | The assertions |
+| ファイル | 内容 |
+| --- | --- |
+| `evals.json` | プロンプトと、各evalが何を見ているか |
+| `fixtures/` | プロンプトが対象とするドキュメントの構成 |
+| `results/grade.py` | 判定 |
 
-## Writing an assertion
+プロンプト、入力、判定は英語のままにしてある。
+入力はエージェントが分析する対象そのものであり、判定はエージェントの答えの文面に対して正規表現を当てるためである。翻訳すると測っているものが変わる。
 
-Assert a behaviour the skill asks for, not knowledge the model already has.
-"Names all four modes" passes without the skill loaded, so it measures nothing and cannot fail.
+## 判定を書く
 
-The graders match text with regular expressions, so an answer can satisfy one by saying the right words.
-Read the answers as well as the score.
+モデルが元から持っている知識ではなく、スキルが求める挙動を判定にする。
+「4つのモードをすべて挙げる」はスキルを読み込まなくても通るので、何も測っていないし、失敗しようがない。
+
+判定は正規表現で文面を照合するので、適切な語を並べただけの答えでも通りうる。
+点数だけでなく、答えそのものも読むこと。

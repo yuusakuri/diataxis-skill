@@ -1,36 +1,36 @@
 # diataxis-skill
 
-An [Agent Skill](https://agentskills.io/specification) that helps an AI agent organise documentation using [Diátaxis](https://diataxis.fr/).
+AIエージェントが[Diátaxis](https://diataxis.fr/)でドキュメントを整理するための[Agent Skill](https://agentskills.io/specification)である。
 
-Diátaxis sorts documentation by what the reader needs when they arrive:
+Diátaxisは、読者が来たときに何を必要としているかでドキュメントを分ける。
 
-| The content informs | and serves | so it is a |
-|---|---|---|
-| action (doing) | acquisition of skill (studying) | tutorial |
-| action (doing) | application of skill (working) | how-to guide |
-| cognition (thinking) | application of skill (working) | reference |
-| cognition (thinking) | acquisition of skill (studying) | explanation |
+| 内容が扱うのは | 読者の状況は | したがって |
+| --- | --- | --- |
+| 行動（する） | 技能の習得（学んでいる） | チュートリアル |
+| 行動（する） | 技能の適用（作業している） | ハウツーガイド |
+| 認識（考える） | 技能の適用（作業している） | リファレンス |
+| 認識（考える） | 技能の習得（学んでいる） | 説明 |
 
-The skill applies that split.
-It decides where a page belongs, sets up a docs tree, and finds pages doing two jobs at once.
+このスキルはその区分を適用する。
+ページの置き場所を決め、ドキュメントの構成を作り、2つの役割を同時に担っているページを見つける。
 
-## Install
+## インストール
 
-See [install the skill](docs/how-to/install-the-skill.md).
+[スキルのインストール方法](docs/how-to/install-the-skill.md)を参照する。
 
-## Usage
+## 使い方
 
-The skill triggers on documentation structure, whether or not Diátaxis is named.
-It answers questions — where does this page belong, why is this folder hard to navigate — and it carries out requests: sort out the docs folder, split this page, decide whether we need a tutorial here.
+Diátaxisという語が出てくるかどうかに関わらず、ドキュメントの構成が問題になったときに起動する。
+質問に答える（このページはどこに置くべきか、なぜこのフォルダは見通しが悪いのか）ほか、依頼も実行する（docsフォルダを整理する、このページを分割する、ここにチュートリアルが必要か判断する）。
 
-## Why Diátaxis
+## なぜDiátaxisなのか
 
-See [why Diátaxis](docs/explanation/why-diataxis.md), which also covers what it does not apply to.
+[なぜDiátaxisなのか](docs/explanation/why-diataxis.md)を参照する。適用しない文書についても書いてある。
 
-## Contributing
+## コントリビュート
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](CONTRIBUTING.md)を参照する。
 
-## License
+## ライセンス
 
-MIT, see [LICENSE](LICENSE).
+MIT。[LICENSE](LICENSE)を参照する。

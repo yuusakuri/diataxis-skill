@@ -1,23 +1,23 @@
-# <Why X?> / <How X and Y fit together>
+# <なぜXなのか> / <XとYはどう噛み合うのか>
 
-<The question this page answers.>
+<このページが答える問い。>
 
-## Context
+## 背景
 
-<What was true that made this a question.>
+<何があって、これが問いになったのか。>
 
-## <The reasoning>
+## <論の中身>
 
-<Discussion.
-Why this way.
-What constrains it.>
+<議論。
+なぜこうなのか。
+何が制約になっているのか。>
 
-## Alternatives considered
+## 検討した代替案
 
-<What else was possible, and why it was not chosen.
-Being honest here is what makes this explanation rather than marketing.>
+<他に何がありえて、なぜ選ばなかったのか。
+ここで正直に書くことが、宣伝ではなく説明である所以である。>
 
-## See also
+## 関連
 
-- <the how-to guide for doing it>
-- <the reference for the details>
+- <実際に行うためのハウツーガイド>
+- <詳細を引くためのリファレンス>

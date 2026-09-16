@@ -1,9 +1,9 @@
-# <Project> documentation
+# <プロジェクト名>のドキュメント
 
-<One sentence on what this project is.>
+<このプロジェクトが何であるかを1文で書く。>
 
-- [Tutorials](tutorials/) — start here if you're new.
-  Lessons that take you from nothing to a working result.
-- [How-to guides](how-to/) — recipes for specific tasks, for when you know what you want to do.
-- [Reference](reference/) — the details: options, APIs, configuration.
-- [Explanation](explanation/) — why things are the way they are.
+- [チュートリアル](tutorials/) — 初めての場合はここから。
+  何もない状態から動く結果までを通す学習用の文書。
+- [ハウツーガイド](how-to/) — 何をしたいか分かっている場合の、作業別の手順。
+- [リファレンス](reference/) — 詳細。オプション、API、設定。
+- [説明](explanation/) — なぜそうなっているのか。

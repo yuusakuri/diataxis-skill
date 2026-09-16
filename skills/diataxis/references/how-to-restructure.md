@@ -1,48 +1,48 @@
-# Restructuring an existing docs tree
+# 既存のドキュメントを再構成する
 
-A docs tree is read while you rearrange it, and its links are held by search engines, issue threads, and other people's bookmarks.
-So the aim is a sequence of small safe moves, not a flag day.
+ドキュメントは並べ替えている最中にも読まれており、そのリンクは検索エンジン、issueのやり取り、他人のブックマークに握られている。
+したがって目指すのは、小さく安全な移動の連なりであって、一斉切り替えではない。
 
-## Order of work
+## 作業の順序
 
-1. Write down the starting state before touching anything.
-   List every page and the mode you judge it to be, so you can show what changed and why.
+1. 何かに手を付ける前に、開始時点の状態を書き出す。
+   全ページと、あなたが判断したモードを並べる。何がなぜ変わったかを示せるようにするためである。
 
-2. Create the four directories and an index, and stop.
-   Commit that alone.
-   It changes nothing for readers and gives every later move a destination.
+2. 4つのディレクトリと索引を作り、そこで止める。
+   それだけをコミットする。
+   読者にとっては何も変わらないが、以降のすべての移動に行き先ができる。
 
-3. Move the easy pages first.
-   Pages that are already one mode — an API reference, a single-task guide — just move.
-   Each move is its own commit, so a bad call is one revert rather than an archaeology exercise.
+3. 簡単なページから移す。
+   すでに1つのモードになっているページ（APIリファレンス、単一作業のガイド）は、移すだけでよい。
+   1回の移動を1コミットにする。判断を誤っても、1回のrevertで済み、発掘作業にならない。
 
-4. Split the mixed pages one at a time.
-   For each: create the new pages, move the material, leave the original as a stub linking to its parts if anything links to it.
-   Splitting is where content gets silently lost; do one page per commit and re-read the diff.
+4. 混ざったページを1つずつ分割する。
+   新しいページを作り、内容を移し、そのページへのリンクがあるなら、元のページは各部へのリンクだけを残したスタブにする。
+   内容が静かに失われるのは分割のときである。1ページ1コミットにして、差分を読み直す。
 
-5. Re-read the list from step 1.
-   Every page should now sit where you said it belonged.
-   A page you are still unsure about is one you split in the wrong place.
+5. 手順1の一覧を読み直す。
+   すべてのページが、あなたが言ったとおりの場所にあるはずである。
+   まだ判断に迷うページは、分割の位置を誤ったページである。
 
-## Keeping links alive
+## リンクを生かしておく
 
-- Prefer redirects if the docs are published: most site generators have them, and a redirect costs a line.
-- Where redirects are impossible, keep the old path as a one-line stub pointing to the new location.
-  Delete stubs later, deliberately, not as part of the move.
-- Grep the repository for links to a page *before* moving it — README files, code comments, and issue templates all link into docs and none of them are checked by a docs build.
+- ドキュメントを公開しているならリダイレクトを使う。たいていのサイト生成器は対応しており、1行で済む。
+- リダイレクトが使えない場合は、旧パスに新しい場所を指す1行のスタブを残す。
+  スタブの削除は後で、移動とは別に、意図して行う。
+- ページを移す**前に**、リポジトリ全体でそのページへのリンクを検索する。README、コード中のコメント、issueのテンプレートはいずれもドキュメントへリンクしているが、どれもドキュメントのビルドでは検査されない。
 
-## What not to do
+## してはならないこと
 
-- Do not rename for tidiness mid-restructure.
-  Moving and renaming in one step makes the diff unreadable, and unreadable diffs are how content disappears.
-- Do not create empty mode directories to "complete the set." An empty `tutorials/` advertises a tutorial that does not exist.
-- Do not restructure and rewrite at once.
-  Move first, commit, then improve the prose.
-  Mixed commits cannot be reviewed.
-- Do not classify from filenames.
-  `setup.md` could be any of the four modes; you have to read it.
+- 再構成の途中で、整理のために名前を変えない。
+  移動と改名を同時にすると差分が読めなくなる。読めない差分は、内容が消える経路である。
+- 体裁を揃えるために空のモードディレクトリを作らない。空の`tutorials/`は、存在しないチュートリアルがあるかのように見せる。
+- 再構成と書き直しを同時にしない。
+  先に移し、コミットし、それから文章を直す。
+  混ざったコミットはレビューできない。
+- ファイル名から分類しない。
+  `setup.md`は4つのモードのどれにでもなりうる。読まなければ分からない。
 
-## When the tree is genuinely large
+## 本当に大きい場合
 
-Work mode by mode rather than page by page: extract all the reference first, since it is the easiest to recognise and often the biggest win, then how-to, then explanation.
-Leave tutorials until last — they are the fewest and the most rewriting.
+ページ単位ではなくモード単位で進める。まずリファレンスをすべて抜き出す。見分けが最も容易で、効果も大きいことが多い。次にハウツー、次に説明。
+チュートリアルは最後に回す。数が最も少なく、書き直しが最も多いからである。

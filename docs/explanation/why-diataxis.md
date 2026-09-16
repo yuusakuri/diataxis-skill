@@ -1,40 +1,40 @@
-# Why Diátaxis
+# なぜDiátaxisなのか
 
-Most documentation problems are not writing problems.
-The sentences are fine and the facts are right, but readers still cannot find what they came for.
+ドキュメントの問題の多くは、文章の問題ではない。
+文は読みやすく事実も正確なのに、読者は探しに来たものを見つけられない。
 
-The usual cause is that one page is serving several readers at once.
-A page called "Caching" attracts everything about caching: why it exists, how to turn it on, what the options are, and a lesson for beginners.
-Four readers arrive, and each has to read the other three's content.
+原因はたいてい、1つのページが複数の読者を同時に相手にしていることにある。
+「キャッシュ」という名前のページには、キャッシュに関するあらゆる内容が集まる。なぜ存在するのか、どう有効にするのか、どんなオプションがあるのか、初心者向けの手ほどき。
+4種類の読者が訪れ、それぞれが他の3人向けの内容を読まされる。
 
-## The two questions
+## 2つの問い
 
-Diátaxis separates documentation by what the reader needs at the moment they arrive, using two questions:
+Diátaxisは、読者が来たその瞬間に何を必要としているかでドキュメントを分ける。問いは2つである。
 
-1. Does the content inform action (doing) or cognition (thinking)?
-2. Does it serve acquisition of skill (studying) or application of skill (working)?
+1. その内容は行動（すること）を扱うのか、認識（考えること）を扱うのか。
+2. 技能の習得（学んでいる状態）に応えるのか、技能の適用（作業している状態）に応えるのか。
 
-| Informs… | Serves… | Mode |
-|---|---|---|
-| action | acquisition | tutorial |
-| action | application | how-to guide |
-| cognition | application | reference |
-| cognition | acquisition | explanation |
+| 扱うのは | 応えるのは | モード |
+| --- | --- | --- |
+| 行動 | 習得 | チュートリアル |
+| 行動 | 適用 | ハウツーガイド |
+| 認識 | 適用 | リファレンス |
+| 認識 | 習得 | 説明 |
 
-Both questions are about the reader, not the subject.
-"Caching" is a subject, so it spans all four.
-That is why filing by subject produces the pile.
+どちらの問いも、主題ではなく読者についてのものである。
+「キャッシュ」は主題なので、4つすべてにまたがる。
+主題で分類すると寄せ集めができるのは、このためである。
 
-## Why it works
+## なぜ機能するのか
 
-It is decidable.
-Two questions with two answers each give four boxes, and most content lands in one of them without argument.
+判定できる。
+2つの問いに2つずつ答えがあり、4つの箱ができる。ほとんどの内容は、議論の余地なくどれか1つに収まる。
 
-It is diagnostic.
-Because the modes have different shapes, a mixed page is visible: a reference page with a "Step 1" in it, an explanation that ends in a numbered list.
-That is the failure this skill is aimed at.
+診断できる。
+モードごとに形が違うので、混ざったページは目で見て分かる。手順1が書かれたリファレンス、番号付きリストで終わる説明。
+このスキルが狙っているのは、この失敗である。
 
-## What it does not cover
+## 何に適用しないのか
 
-Diátaxis organises documentation written for readers, so it does not govern documents whose shape is set by their purpose — an architecture decision record, a product requirements document, an RFC, a runbook, a changelog.
-Forcing those into four modes loses what makes them useful, and the skill defers on them rather than classifying them.
+Diátaxisは読者のために書かれたドキュメントを整理するものなので、目的によって形が決まっている文書には適用しない。アーキテクチャ決定記録、プロダクト要求仕様書、RFC、運用手順書、変更履歴がこれにあたる。
+これらを4つのモードに押し込むと、その文書を有用にしている部分が壊れる。スキルは分類せず、対象外として扱う。

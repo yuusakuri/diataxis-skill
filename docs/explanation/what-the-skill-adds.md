@@ -1,35 +1,35 @@
-# What the skill adds
+# このスキルが足すもの
 
-Diátaxis is well known, and a capable model applies it unprompted.
-The skill's value is therefore not the framework but the four rules below, each of which `evals/` checks.
+Diátaxisはよく知られており、能力のあるモデルは指示されなくても適用する。
+したがってこのスキルの価値は枠組みそのものではなく、以下の4つの規則にある。いずれも`evals/`で確認する。
 
-## Evidence you can argue with
+## 反論できる根拠
 
-The skill requires each judgement to name the lines it rests on.
-"This page is doing three jobs" is an opinion; "lines 3–5 are explanation, 7–10 a procedure, 12–16 a reference table" is something the author can disagree with point by point.
+判断ごとに、その根拠となった行を示すことを求める。
+「このページは3つの役割を担っている」は意見だが、「3〜5行目が説明、7〜10行目が手順、12〜16行目がリファレンスの表」は、著者が一点ずつ反論できるものである。
 
-## Refusal to build empty structure
+## 空の構造を作らない
 
-The four mode directories are not the goal.
-A model asked to apply Diátaxis will readily scaffold `tutorials/` and leave it empty, or write a tutorial nobody asked for so that the set looks complete.
-The skill treats a missing mode as a gap only when a reader needs it, and says so instead of filling it.
+4つのモードのディレクトリを揃えることが目的ではない。
+Diátaxisを適用しろと言われたモデルは、`tutorials/`を作って空のまま放置したり、体裁を整えるために誰も頼んでいないチュートリアルを書いたりしがちである。
+このスキルは、モードの欠落を、それを必要とする読者がいるときだけ欠落として扱う。埋めるのではなく、そう伝える。
 
-## Refusal of plausible non-fixes
+## もっともらしい偽の解決を拒む
 
-Adding four `##` headings to a page containing four modes makes it easier to skim and leaves it four modes.
-The skill rejects that as a fix, because the problem is which page the content is on, not how it is signposted.
+4つのモードが混ざったページに`##`の見出しを4つ足せば、流し読みはしやすくなるが、中身は4つのモードのままである。
+このスキルはそれを解決として認めない。問題は内容がどう見出し付けされているかではなく、どのページに載っているかだからである。
 
-## A boundary
+## 境界
 
-An architecture decision record, a PRD, an RFC, a runbook and a changelog have shapes fixed by their purpose.
-The skill declines to file them in the four modes, and says which artefact it is instead.
+アーキテクチャ決定記録、プロダクト要求仕様書、RFC、運用手順書、変更履歴は、目的によって形が決まっている。
+このスキルはこれらを4つのモードに分類せず、どの成果物なのかを答える。
 
-## Checking these
+## 確かめ方
 
-`evals/` holds the prompts, the fixtures and the assertions.
-Each assertion states one of the behaviours above, so a failure is a gap between this page and what the agent did.
-`evals/README.md` has the procedure.
+`evals/`にプロンプト、入力、判定がある。
+各判定は上記の挙動を1つずつ述べたものなので、失敗はこのページと実際の答えの差を意味する。
+手順は`evals/README.md`にある。
 
-No results are recorded here.
-A number in this file would only be trustworthy if it were regenerated whenever the skill changed, and nothing enforces that.
-Run the evals and read the answers.
+数値はここに載せない。
+スキルを変えるたびに再計測されることが保証されない限り、この場所に書かれた数値は信用できない。
+evalを実行し、答えそのものを読むこと。

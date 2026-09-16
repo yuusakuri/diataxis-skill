@@ -1,7 +1,9 @@
-# diataxis-skill documentation
+# ドキュメント
 
-This skill helps an AI agent organise documentation using [Diátaxis](https://diataxis.fr/).
+このスキルは、AIエージェントが[Diátaxis](https://diataxis.fr/)でドキュメントを整理するのを助ける。
 
-- [How to install the skill](how-to/install-the-skill.md)
-- [Why Diátaxis, and what it does not cover](explanation/why-diataxis.md)
-- [What the skill adds](explanation/what-the-skill-adds.md)
+インストールは[README](../README.md#インストール)にある。
+
+- [スキルのインストール方法](how-to/install-the-skill.md)
+- [なぜDiátaxisなのか、何に適用しないのか](explanation/why-diataxis.md)
+- [このスキルが足すもの](explanation/what-the-skill-adds.md)
