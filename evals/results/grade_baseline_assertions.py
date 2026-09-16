@@ -8,7 +8,12 @@ from __future__ import annotations
 import json, re, sys
 from pathlib import Path
 
-WS = Path("/home/user/diataxis-workspace/iteration-1")
+import os, sys
+
+# Directory holding the answers, laid out as <eval>/<config>/outputs/answer.md.
+# Pass it as the first argument, or set DIATAXIS_EVAL_RUNS.
+WS = Path(sys.argv[1] if len(sys.argv) > 1
+          else os.environ.get("DIATAXIS_EVAL_RUNS", "evals/runs"))
 MODES = ("tutorial", "how-to", "reference", "explanation")
 
 

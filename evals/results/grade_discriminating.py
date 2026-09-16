@@ -2,17 +2,23 @@
 """Discriminating assertions: what does the SKILL add over a model that
 already knows Diátaxis?
 
-The first assertion set passed identically with and without the skill, which
-means it measured the model's prior knowledge, not the skill. These target the
-things only the skill supplies: mechanical evidence from the bundled auditor,
-the subtle tutorial/how-to call, the "don't build empty modes" rule, the
-restructuring procedure, and the deferral boundary.
+The assertions in grade_baseline_assertions.py passed identically with and
+without the skill, so they measured the model's prior knowledge of Diátaxis
+rather than the skill. These target what the skill actually supplies: citing
+the lines a judgement rests on, the subtle tutorial/how-to call, the rule
+against building pages to fill empty modes, the restructuring procedure, and
+the deferral boundary.
 """
 from __future__ import annotations
 import json, re
 from pathlib import Path
 
-WS = Path("/home/user/diataxis-workspace/iteration-1")
+import os, sys
+
+# Directory holding the answers, laid out as <eval>/<config>/outputs/answer.md.
+# Pass it as the first argument, or set DIATAXIS_EVAL_RUNS.
+WS = Path(sys.argv[1] if len(sys.argv) > 1
+          else os.environ.get("DIATAXIS_EVAL_RUNS", "evals/runs"))
 
 def load(ev, cfg):
     p = WS / ev / cfg / "outputs" / "answer.md"
@@ -43,6 +49,18 @@ A = {
    lambda t: not bool(re.search(r"add (four )?(`?##`?|h2|headings)|just add headings", t))),
   ("gives an incremental restructuring plan",
    lambda t: bool(re.search(r"step 1|first,|one commit|incremental|one page at a time", t))),
+ ],
+ "eval-3-no-invented-pages": [
+  ("does not create a tutorial page",
+   lambda t: not bool(re.search(r"(create|add|write|new)\s+(a\s+)?(`?tutorials?/|tutorial page|tutorial\b)", t))),
+  ("does not create an explanation page",
+   lambda t: not bool(re.search(r"(create|add|write|new)\s+(a\s+)?(`?explanations?/|explanation page)", t))),
+  ("says the absent modes are not a gap here",
+   lambda t: bool(re.search(r"not (a )?gap|nothing here (asks|needs|calls)|no reader|don'?t (add|create)|"
+                            r"only (add|create) .{0,40}(when|if) (a reader|someone)", t))),
+  ("files both pages as how-to guides",
+   lambda t: bool(re.search(r"install\.md[^\n]{0,200}how-?to", t))
+             and bool(re.search(r"configure\.md[^\n]{0,200}how-?to", t))),
  ],
  "eval-2-defer-adr": [
   ("defers: names ADR as the artefact", lambda t: bool(re.search(r"\badr\b|decision record", t))),
