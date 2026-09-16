@@ -7,24 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  auditor:
-    name: Auditor
+  skill:
+    name: SKILL.md conforms to the spec
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.11", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Unit tests
-        run: python3 -m unittest discover -s tests -v
-      - name: A correct tree produces no findings
-        run: python3 skills/diataxis/scripts/audit_docs.py tests/fixtures/clean --strict
-      - name: A mixed tree produces findings
-        run: |
-          if python3 skills/diataxis/scripts/audit_docs.py tests/fixtures/mixed --strict; then
-            echo "expected findings on the mixed fixture, got none" >&2
-            exit 1
-          fi
+          python-version: "3.12"
+      - run: python3 tests/validate_skill.py

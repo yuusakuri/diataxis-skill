@@ -41,11 +41,13 @@ The assertions that separated them:
 | Refuses to create an empty placeholder page | pass | fail |
 | Does not offer "add some headings" as a fix | pass | fail |
 
-## What that means
+The first row was measured while the repository still bundled a script that
+produced line-number citations.
+That script has since been removed, so the row records what was true then and
+has not been re-measured.
+The other two rows are about the skill's judgement and are unaffected.
 
-Evidence.
-The bundled auditor produces line-number citations, so a recommendation can be checked.
-Neither unaided run produced any, because neither had a tool that could.
+## What that means
 
 Resistance to plausible non-fixes.
 The unaided run suggested adding four `##` headings to a four-mode page.
