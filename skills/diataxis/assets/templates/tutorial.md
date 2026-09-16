@@ -1,25 +1,25 @@
-# <Do the concrete thing>
+# <具体的な成果を表す題>
 
-In this tutorial we'll <outcome>.
-By the end you'll have <a specific, checkable result>.
+このチュートリアルでは<成果>を作る。
+終わったときに<確認できる具体的な結果>が手元にある。
 
-You need: <the minimum, and nothing more>
+必要なもの: <最小限のもの。それ以上は書かない>
 
-## 1. <First step, named by what it achieves>
+## 1. <最初の手順。何を達成するかで名付ける>
 
-<One action.>
+<1つの操作。>
 
-You should see:
+次のように表示される。
 
 ```
-<the actual output>
+<実際の出力>
 ```
 
-## 2. <Next step>
+## 2. <次の手順>
 
 ...
 
-## What we did
+## ここまでにしたこと
 
-<Recap in two sentences.
-Then link onward — to a how-to guide for the real version of this task, and to an explanation for why it works this way.>
+<2文で振り返る。
+そのうえで次へ案内する。実際の作業に使うハウツーガイドと、なぜこう動くのかの説明へ。>

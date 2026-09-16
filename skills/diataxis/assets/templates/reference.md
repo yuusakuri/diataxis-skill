@@ -1,13 +1,13 @@
-# <Thing> reference
+# <対象>リファレンス
 
-<One sentence stating what this describes.
-No instruction.>
+<何を記述したものかを1文で書く。
+指示は書かない。>
 
-## <Entry>
+## <項目>
 
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `<name>` | `<type>` | `<default>` | <what it is> |
+| フィールド | 型 | 既定値 | 説明 |
+| --- | --- | --- | --- |
+| `<名前>` | `<型>` | `<既定値>` | <何であるか> |
 
-<Repeat with identical shape for every entry.
-Consistency is the feature.>
+<すべての項目を同じ形で繰り返す。
+一貫していることがこの文書の価値である。>

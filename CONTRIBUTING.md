@@ -1,30 +1,30 @@
-# Contributing
+# コントリビュート
 
-## Changing the skill
+## スキルを変更する
 
-Read the primary source at [diataxis.fr](https://diataxis.fr/) before changing anything about the four modes.
-This repository applies Diátaxis; it does not reinterpret it.
+4つのモードに関わる変更をする前に、一次情報である[diataxis.fr](https://diataxis.fr/)を読むこと。
+このリポジトリはDiátaxisを適用するものであり、解釈し直すものではない。
 
-Keep `SKILL.md` under 500 lines.
-Detail belongs in `references/`, which the agent reads only when it needs to.
+`SKILL.md`は500行未満に保つ。
+詳細は`references/`に置く。エージェントは必要になったときだけそれを読む。
 
-The check:
+検証は次のとおり。
 
 ```bash
 python3 tests/validate_skill.py
 ```
 
-It parses the frontmatter as YAML and checks the fields the [Agent Skills spec](https://agentskills.io/specification) requires, that the name matches the directory, and that every bundled file `SKILL.md` points at exists.
+frontmatterをYAMLとして解析し、[Agent Skills仕様](https://agentskills.io/specification)が要求するフィールド、nameとディレクトリ名の一致、`SKILL.md`が参照する同梱ファイルの存在を確認する。
 
-## Changing what the skill decides
+## スキルの判断を変更する
 
-A change to the skill's judgement needs evidence that it changed the answer.
-`evals/` holds the prompts and the graders.
-Add a case there showing the behaviour you are fixing, and record the result with and without the skill.
+スキルの判断を変える場合、変更前なら失敗したはずの判定が必要である。
+`evals/`にプロンプトと判定がある。
+直そうとしている挙動を示す事例をそこに足し、実行する。
 
-A change that leaves every eval identical is a change to the wording, not to the skill.
+どの判定にも引っかからない変更は、判断ではなく文言の変更である。
 
-## Reporting a problem
+## 問題を報告する
 
-Open an issue with the prompt you gave, the docs tree you gave it, and the answer you got.
-The answer is the evidence: the skill produces judgements, and a judgement you disagree with is worth more than a description of it.
+与えたプロンプト、与えたドキュメントの構成、返ってきた答えを添えてissueを作成する。
+答えそのものが根拠になる。このスキルが出すのは判断であり、納得できない判断は、その説明よりも価値がある。

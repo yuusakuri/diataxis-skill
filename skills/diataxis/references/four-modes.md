@@ -1,121 +1,121 @@
-# The four modes in depth
+# 4つのモードの詳細
 
-Read this when a page is hard to place, or when rewriting one from one mode into another.
-`SKILL.md` has the compass; this has the detail and worked examples.
+ページの置き場所が決めにくいとき、あるモードから別のモードへ書き換えるときに読む。
+判断の軸は`SKILL.md`にある。ここには詳細と具体例を置く。
 
-## Contents
+## 目次
 
-- [Tutorial](#tutorial)
-- [How-to guide](#how-to-guide)
-- [Reference](#reference)
-- [Explanation](#explanation)
-- [The four confusions](#the-four-confusions)
-- [Before and after](#before-and-after)
-
----
-
-## Tutorial
-
-The reader is a beginner who does not yet know what they need to know.
-They cannot tell you what they want, because they do not know the vocabulary yet.
-Your job is to give them an experience of success.
-
-- Promise one concrete outcome and deliver exactly that.
-- Every step produces a visible result.
-  "You should see…" is the load-bearing sentence of a tutorial: it lets the reader confirm they are still on the path.
-- One path only.
-  No "you could also…", no conditional branches, no alternatives.
-  Every choice you offer is a chance to get lost.
-- Minimum explanation.
-  Where the reader will wonder why, link to explanation and carry on.
-- It must work, every time, from a clean state.
-  A tutorial that fails at step 7 is worse than no tutorial, because it teaches the reader the project is unreliable.
-
-Tutorials are the most expensive documentation to maintain, which is why most projects should have very few.
-One that works beats five that rot.
-
-## How-to guide
-
-The reader is competent and at work.
-They have a goal and a real, messy situation.
-
-- Titled by the goal: "How to restore a backup to a new region."
-- Starts at the problem, not the tool.
-  The machinery is means, not subject.
-- Allows for variation, because real situations vary: "if you are using the managed service, do X instead."
-- Omits teaching.
-  The reader does not want to learn the system; they want to finish.
-- Not exhaustive.
-  A how-to guide is a path, not a map.
-  Completeness belongs to reference.
-
-The commonest failure is writing tool-centred guides — "Using the export command" — which leave the reader to work out for themselves whether that command solves their problem.
-
-## Reference
-
-The reader is mid-task and needs a fact.
-They arrive, take one thing, and leave.
-
-- Describe the machinery.
-  State what is.
-  Never instruct.
-- Structure it to mirror the thing described, so a reader can predict where to look.
-  If the code has modules, so does the reference.
-- Be consistent above all: same order, same headings, same level of detail for every entry.
-  A reader learns the shape once and then reads fast.
-- Be austere.
-  Reference is allowed to be boring.
-  Personality here costs scanning speed.
-- Generate it from source where you can; hand-written reference drifts from reality, and reference that is wrong is worse than reference that is missing.
-
-## Explanation
-
-The reader is trying to understand, probably not at the keyboard.
-
-- Bound it with a question or topic: "Why deployments are immutable", "How caching and invalidation fit together."
-- Discuss why.
-  History, constraints, trade-offs, the alternatives that were rejected and the reason.
-- Admit opinion and multiple viewpoints.
-  This is the one mode where that is correct.
-- Connect things.
-  Explanation is where the reader builds a mental model that the other three modes assume.
-
-Explanation is the mode teams skip, and skipping it is expensive: the reasoning gets re-derived in code review, in incident retrospectives, and in arguments about decisions nobody recorded.
+- [チュートリアル](#チュートリアル)
+- [ハウツーガイド](#ハウツーガイド)
+- [リファレンス](#リファレンス)
+- [説明](#説明)
+- [4つの取り違え](#4つの取り違え)
+- [分割の例](#分割の例)
 
 ---
 
-## The four confusions
+## チュートリアル
 
-| Confusion | Symptom | Fix |
-|---|---|---|
-| Tutorial ↔ how-to | "Getting started" that assumes competence, or a how-to that teaches basics | Ask whether the reader knows what they want. If yes, how-to. |
-| Reference ↔ how-to | A reference entry with a procedure in it | Move the procedure to a how-to guide, link from the entry |
-| Explanation ↔ reference | Discussion of why buried in an API description | Reference states what is; move the reasoning out |
-| Explanation ↔ how-to | An essay that ends in a numbered list | Split; the instructions are hiding from the people who need them |
+読者は初心者で、自分が何を知るべきかをまだ知らない。
+語彙を持っていないので、何が欲しいかを言葉にできない。
+与えるべきものは、うまくいったという経験である。
+
+- 具体的な成果を1つ約束し、それだけを届ける。
+- どの手順にも目に見える結果がある。
+  「次のように表示される」はチュートリアルの要となる一文である。読者が道を外れていないことを自分で確認できる。
+- 道筋は1本だけにする。
+  「こうすることもできます」も、条件分岐も、代替案も書かない。
+  選択肢を出すたびに、読者が迷う機会が増える。
+- 説明は最小限にする。
+  読者がなぜかと思うであろう箇所は、説明へのリンクを置いて先へ進む。
+- 何もない状態から、毎回必ず動くこと。
+  手順7で失敗するチュートリアルは、無いよりも悪い。このプロジェクトは信用できないと教えてしまう。
+
+チュートリアルは維持費が最も高い。ほとんどのプロジェクトで数を絞るべきなのはこのためである。
+動くもの1本が、腐った5本に勝る。
+
+## ハウツーガイド
+
+読者は作業中の、能力のある人である。
+目的があり、現実の込み入った状況に置かれている。
+
+- 目的で題を付ける。「バックアップを別リージョンへ復元する方法」。
+- 道具ではなく問題から始める。
+  仕組みは手段であって主題ではない。
+- 状況の違いを許容する。現実は一様ではない。「マネージドサービスを使っている場合は代わりにXをする」。
+- 教えない。
+  読者はシステムを学びたいのではなく、終わらせたい。
+- 網羅しない。
+  ハウツーガイドは経路であって地図ではない。
+  網羅はリファレンスの仕事である。
+
+最も多い失敗は、道具を中心にしたガイドを書くことである。「exportコマンドの使い方」と題されると、そのコマンドが自分の問題を解決するのかどうかを読者が自分で考える羽目になる。
+
+## リファレンス
+
+読者は作業の途中で、事実を1つ必要としている。
+来て、1つ取って、去る。
+
+- 仕組みを記述する。
+  何であるかを述べる。
+  指示は書かない。
+- 記述対象の構造をそのまま反映させる。読者がどこを見ればよいか予測できるようにする。
+  コードにモジュールがあるなら、リファレンスにもモジュールがある。
+- 何よりも一貫させる。どの項目も、同じ順序、同じ見出し、同じ粒度で書く。
+  読者は形を一度覚えれば、あとは速く読める。
+- 簡素にする。
+  リファレンスは退屈でよい。
+  ここでの個性は、読者が探す速度を下げる。
+- 可能ならソースから生成する。手書きのリファレンスは実態からずれていく。間違ったリファレンスは、無いリファレンスより悪い。
+
+## 説明
+
+読者は理解しようとしており、おそらくキーボードの前にいない。
+
+- 問いか主題で範囲を区切る。「なぜデプロイは不変なのか」「キャッシュと無効化はどう噛み合うのか」。
+- なぜかを論じる。
+  経緯、制約、トレードオフ、退けた案とその理由。
+- 意見や複数の見方を出してよい。
+  4つのモードのうち、それが正しいのはここだけである。
+- ものごとを結びつける。
+  説明は、他の3つのモードが前提としている理解の枠組みを読者が作る場所である。
+
+説明は、チームが省きがちなモードである。そして省くと高くつく。コードレビューで、障害の振り返りで、誰も記録しなかった決定をめぐる議論で、同じ推論が何度も繰り返される。
 
 ---
 
-## Before and after
+## 4つの取り違え
 
-Before — one file, `docs/caching.md`, doing four jobs:
+| 取り違え | 症状 | 対処 |
+| --- | --- | --- |
+| チュートリアル ↔ ハウツー | 能力を前提とした「はじめに」、あるいは基礎から教えるハウツー | 読者が自分の欲しいものを分かっているかを問う。分かっているならハウツー。 |
+| リファレンス ↔ ハウツー | 手順が書かれたリファレンスの項目 | 手順をハウツーガイドへ移し、項目からリンクする |
+| 説明 ↔ リファレンス | APIの記述の中に埋もれた「なぜ」の議論 | リファレンスは何であるかを述べる。論拠は外へ出す |
+| 説明 ↔ ハウツー | 番号付きリストで終わる論説 | 分割する。手順が、それを必要とする人から隠れている |
+
+---
+
+## 分割の例
+
+分割前。`docs/caching.md`という1つのファイルが4つの役割を担っている。
 
 ```markdown
 # Caching
-Caching exists because our origin is slow and traffic is spiky.  <- explanation
-We considered a CDN-only approach but rejected it because...     <- explanation
-To enable caching: 1. set CACHE=1  2. restart the workers        <- how-to
-| Option | Default | -------- | TTL | 300 |                       <- reference
-In this guide you will build your first cached endpoint...        <- tutorial
+キャッシュがあるのはオリジンが遅く、トラフィックに波があるためである。   <- 説明
+CDNのみの構成も検討したが、無効化の遅延が許容できず退けた。       <- 説明
+有効にするには: 1. CACHE=1 を設定 2. ワーカーを再起動            <- ハウツー
+| オプション | 既定値 | -------- | TTL | 300 |                    <- リファレンス
+このガイドでは最初のキャッシュ付きエンドポイントを作る…            <- チュートリアル
 ```
 
-After — four files, each with one reader in mind:
+分割後。4つのファイルが、それぞれ1人の読者を想定している。
 
 ```
-docs/explanation/why-we-cache.md      why it exists, what was rejected and why
-docs/how-to/enable-caching.md         "How to enable caching for a service"
-docs/reference/cache-options.md       the options table, nothing else
-docs/tutorials/first-cached-endpoint.md  a lesson that works end to end
+docs/explanation/why-we-cache.md          なぜ存在するのか、何を退けたのか
+docs/how-to/enable-caching.md             「サービスでキャッシュを有効にする方法」
+docs/reference/cache-options.md           オプションの表だけ
+docs/tutorials/first-cached-endpoint.md   最後まで通る学習用の文書
 ```
 
-Nothing was deleted.
-Each piece simply went where its reader is.
+何も削っていない。
+それぞれの内容が、その読者のいる場所へ移っただけである。

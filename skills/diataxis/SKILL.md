@@ -1,6 +1,6 @@
 ---
 name: diataxis
-description: 'Organise documentation with the Diátaxis framework - decide whether a page is a tutorial, how-to guide, reference, or explanation, scaffold a docs tree around those four modes, audit existing docs for mode-mixing, and write each page in the mode it belongs to. Use whenever documentation structure is in question: starting a docs/ directory, deciding where a new page goes, a docs folder that has grown into a pile of unrelated markdown, a README that has swollen past what anyone reads, or a request to reorganise, split, restructure, or audit documentation. Use it even when Diátaxis is not named - "where should this doc live", "our docs are a mess", "split up this guide" are all this skill.'
+description: 'Diátaxisでドキュメントを整理する。ページがチュートリアル、ハウツーガイド、リファレンス、説明のどれなのかを判断し、その4モードでドキュメントの構成を作り、役割が混ざったページを見つけ、各ページをそのモードにふさわしい書き方で書く。ドキュメントの構成が問題になったときに使う。docs/ を作り始めるとき、新しいページの置き場所を決めるとき、脈絡のないMarkdownの山になったdocsフォルダ、誰も読まない長さに膨れたREADME、ドキュメントの再編成、分割、再構成、点検の依頼。Diátaxisという語が出てこなくても使う。「このドキュメントはどこに置けばいい」「うちのドキュメントはぐちゃぐちゃ」「このガイドを分けて」はいずれもこのスキルである。'
 license: MIT
 metadata:
   framework: "Diátaxis (https://diataxis.fr/)"
@@ -9,134 +9,134 @@ metadata:
 
 # Diátaxis
 
-Most documentation problems are not writing problems.
-They are classification problems: a page is trying to serve two readers at once, so it serves neither.
+ドキュメントの問題の多くは、文章の問題ではない。
+分類の問題である。1つのページが2人の読者を同時に相手にしようとして、どちらの役にも立っていない。
 
-Diátaxis solves this by separating documentation into four modes, each answering a different need.
-Your job with this skill is to put every piece of content in exactly one of them, and keep it there.
+Diátaxisはこれを、それぞれ別の必要に応える4つのモードにドキュメントを分けることで解決する。
+このスキルでの仕事は、あらゆる内容をそのうちの1つだけに置き、そこに保つことである。
 
-## The compass
+## 判断の軸
 
-Two questions settle nearly every case.
-Ask them about the reader at the moment they arrive, not about the subject matter:
+ほとんどの場合、2つの問いで決まる。
+主題についてではなく、読者が来たその瞬間について問う。
 
-1. Does this inform action (doing) or cognition (thinking)?
-2. Does it serve acquisition of skill (study) or application of skill (work)?
+1. これは行動（すること）を扱うのか、認識（考えること）を扱うのか。
+2. 技能の習得（学んでいる状態）に応えるのか、技能の適用（作業している状態）に応えるのか。
 
-| If the content informs… | …and serves… | …it belongs in |
-|---|---|---|
-| action | acquisition of skill | tutorial |
-| action | application of skill | how-to guide |
-| cognition | application of skill | reference |
-| cognition | acquisition of skill | explanation |
+| 扱うのが… | …応えるのが… | …置き場所は |
+| --- | --- | --- |
+| 行動 | 技能の習得 | チュートリアル |
+| 行動 | 技能の適用 | ハウツーガイド |
+| 認識 | 技能の適用 | リファレンス |
+| 認識 | 技能の習得 | 説明 |
 
-When you cannot decide, the usual cause is that the content is genuinely two things.
-Split it and link the halves — that is the answer, not a compromise.
+決められないときは、たいていその内容が本当に2つのものである。
+分割して両者をリンクする。それが答えであって、妥協ではない。
 
-## What each mode owes its reader
+## 各モードが読者に負うもの
 
-| Mode | The reader is… | So the page must… | And must not… |
-|---|---|---|---|
-| Tutorial | learning by doing, with no prior context | guarantee success on a single concrete path; hold their hand | branch, discuss alternatives, or list every option |
-| How-to guide | at work, already knows what they want | show a route through a real problem, allowing for variation | teach, explain, or try to be exhaustive |
-| Reference | mid-task, needs a fact now | be accurate, complete, and boring; describe the machinery | instruct, persuade, or explain why |
-| Explanation | trying to understand, away from the keyboard | discuss why, connect ideas, admit alternatives and trade-offs | instruct or catalogue |
+| モード | 読者は… | ページは… | してはならないのは… |
+| --- | --- | --- | --- |
+| チュートリアル | 前提知識なしに、やりながら学んでいる | 1本の具体的な道筋での成功を保証する。手を取って導く | 分岐する、代替案を論じる、選択肢を並べる |
+| ハウツーガイド | 作業中で、何が欲しいか分かっている | 現実の問題を通る経路を示す。状況の違いを許容する | 教える、説明する、網羅しようとする |
+| リファレンス | 作業の途中で、今すぐ事実が要る | 正確で、完全で、退屈である。仕組みを記述する | 指示する、説得する、なぜかを説明する |
+| 説明 | 理解しようとしている。キーボードの前にいない | なぜかを論じる。考えを結びつけ、代替案とトレードオフを認める | 指示する、目録を作る |
 
-## Working with an existing docs tree
+## 既存のドキュメントを扱う
 
-Read the pages before proposing anything.
-For each one, name the reader it serves and what they were doing when they opened it.
-A page you cannot answer that for is the page to look at first.
+何かを提案する前に、ページを読む。
+1ページずつ、どの読者に向けたものか、その読者は何をしていて開いたのかを言葉にする。
+それを言えないページが、最初に見るべきページである。
 
-Say which lines led you to each conclusion, so the author can disagree with the evidence rather than with you.
-Judgements about what a reader needs are yours to make and to defend; do not present them as measurements.
+どの行から判断したのかを示す。著者があなたではなく根拠に反論できるようにするためである。
+読者が何を必要としているかの判断は、あなたが下し、あなたが擁護するものである。測定結果のように見せてはならない。
 
-Then, for each finding:
+見つけたものごとに、次のように扱う。
 
-1. Unclassified page — apply the compass and move it.
-   If it resists classification, that is the signal it is two pages.
-2. Mode-mixing — cut the foreign material out and move it to its own mode, leaving a link.
-   The commonest case by far is instruction absorbed into reference or explanation; procedures hide there, where nobody looking for a procedure will look.
-3. Missing mode — only a gap when a reader needs it.
-   Say what that reader would have come for, and leave the mode absent until someone does.
-   Missing explanation is worth raising, because teams skip it and then re-derive it in every code review.
+1. モードのディレクトリの外にあるページ — 判断の軸を当てて移す。
+   分類を拒むなら、それは2つのページであるという合図である。
+2. 役割の混在 — 異質な部分を切り出して本来のモードへ移し、リンクを残す。
+   圧倒的に多いのは、リファレンスや説明に手順が吸収されている場合である。手順を探す人が見ない場所に、手順が隠れている。
+3. モードの欠落 — それを必要とする読者がいるときだけ欠落である。
+   その読者が何を求めて来たはずかを述べ、実際に現れるまでは欠落のままにしておく。
+   説明の欠落は指摘する価値がある。チームが省き、コードレビューのたびに同じ推論をやり直すことになるからである。
 
-Restructure incrementally.
-A docs tree is read while it is being rearranged, so move one page at a time and keep links working.
-`references/how-to-restructure.md` covers doing this on a large tree without a flag day.
+段階的に進める。
+ドキュメントは並べ替えている最中にも読まれているので、1ページずつ動かし、リンクを生かしておく。
+大きな構成を一斉更新なしに扱う方法は`references/how-to-restructure.md`にある。
 
-## Starting a new docs tree
+## 新しいドキュメントを作る
 
 ```
 docs/
-├── index.md              what this is, and a link into each mode
-├── tutorials/            numbered lessons; usually very few
-├── how-to/               one file per real task, named "How to …"
-├── reference/            mirrors the structure of the thing it describes
-└── explanation/          one file per topic, named as a question or theme
+├── index.md              これが何であるか、各モードへのリンク
+├── tutorials/            番号付きの学習用の文書。通常ごく少数
+├── how-to/               実際の作業ごとに1ファイル。「〜する方法」と題する
+├── reference/            記述対象の構造をそのまま映す
+└── explanation/          主題ごとに1ファイル。問いか主題で題を付ける
 ```
 
-Templates for each mode's index page and a first page are in `assets/templates/`.
+各モードの索引ページと最初のページのテンプレートが`assets/templates/`にある。
 
-Two naming rules carry most of the weight, because a name is what a reader navigates by: a how-to guide is titled by the reader's goal ("How to rotate API keys"), never by the machinery ("The rotate command").
-An explanation is titled by its question or topic ("Why deployments are immutable"), never as a task.
+2つの命名規則が大きな比重を占める。読者は名前を頼りに動くからである。ハウツーガイドは読者の目的で題を付ける（「APIキーを更新する方法」）。仕組みで付けてはならない（「rotateコマンド」）。
+説明は問いか主題で題を付ける（「なぜデプロイは不変なのか」）。作業のようには付けない。
 
-## Scope
+## 範囲
 
-Organise what you were given.
-A request to sort out a docs folder is not a request to write the pages it does not have.
+渡されたものを整理する。
+docsフォルダを整理してほしいという依頼は、無いページを書いてほしいという依頼ではない。
 
-Do not create a page to complete the set.
-Four half-filled modes serve nobody better than two good ones: an empty `tutorials/` advertises a lesson that does not exist, and a tutorial written to fill a slot teaches nothing anybody asked to learn.
+体裁を揃えるためにページを作らない。
+中途半端に埋まった4つのモードは、良いモード2つに勝らない。空の`tutorials/`は存在しない学習用の文書があるかのように見せ、枠を埋めるために書かれたチュートリアルは、誰も学びたいと言っていないことを教える。
 
-If a mode is missing and you think a reader wants it, name that reader and say what they would have come for.
-Then let the author decide whether to write it.
+モードが欠けていて、それを求める読者がいると考えるなら、その読者が何を求めて来たはずかを述べる。
+書くかどうかは著者が決める。
 
-## Writing in a mode
+## モードに沿って書く
 
-Before writing, say which mode the page is and why.
-If that sentence is hard to write, stop — the page is not yet one thing.
+書き始める前に、そのページがどのモードで、なぜそうなのかを言葉にする。
+その一文が書きにくいなら手を止める。そのページはまだ1つのものになっていない。
 
-- Tutorial — write in the first person plural ("we'll create…"), promise a concrete outcome up front, and make every step produce a visible result the reader can check against.
-  Never explain more than the step needs; link out instead.
-  The reader must finish it and feel it worked.
-- How-to guide — start from the problem, not the tool.
-  Assume competence.
-  Cover the variations a real user hits ("if you are on a managed instance, instead…").
-  Omit everything that is not on the path.
-- Reference — be austere and consistent.
-  State what is, not what to do.
-  Structure it to mirror the code or the API, so a reader can predict where a fact lives.
-  Consistency matters more than prose quality here.
-- Explanation — bound it by a question ("Why X?", "How does Y fit with Z?").
-  Admit opinion, history, and alternatives — that is what makes it explanation rather than reference with adjectives.
+- チュートリアル — 一人称複数で書き（「〜を作ります」）、具体的な成果を最初に約束し、どの手順にも読者が照合できる目に見える結果を持たせる。
+  その手順に必要な以上の説明はしない。リンクで外へ出す。
+  読者は最後まで終えて、うまくいったと感じられなければならない。
+- ハウツーガイド — 道具ではなく問題から始める。
+  読者に能力があることを前提にする。
+  現実にぶつかる状況の違いを扱う（「マネージドインスタンスの場合は代わりに…」）。
+  経路の上にないものはすべて省く。
+- リファレンス — 簡素に、一貫させる。
+  何をすべきかではなく、何であるかを述べる。
+  コードやAPIの構造を映す形にして、どこに何が書いてあるかを読者が予測できるようにする。
+  ここでは文章の質より一貫性が重要である。
+- 説明 — 問いで範囲を区切る（「なぜXなのか」「YとZはどう噛み合うのか」）。
+  意見、経緯、代替案を出してよい。それがあるからこそ、形容詞付きのリファレンスではなく説明になる。
 
-`references/four-modes.md` has fuller per-mode guidance and worked before/after examples; read it when a page is hard to place or you are rewriting one in a new mode.
+モードごとのさらに詳しい指針と、分割の例が`references/four-modes.md`にある。ページの置き場所が決めにくいとき、別のモードへ書き換えるときに読む。
 
-## A note on this skill's own files
+## このスキル自身のファイルについて
 
-The bundle uses the directory names the Agent Skills spec defines — `references/`, `assets/` — so they are not mode names.
-The files inside are named by mode instead: `four-modes.md` is reference, `how-to-restructure.md` is a how-to.
+同梱物のディレクトリ名は Agent Skills 仕様が定めるもの（`references/`、`assets/`）であり、モード名ではない。
+中のファイルの方をモードで名付けている。`four-modes.md`はリファレンス、`how-to-restructure.md`はハウツーである。
 
-## Where this skill defers
+## 適用しないもの
 
-Diátaxis governs documentation for readers.
-It is not the right frame for documents whose structure is fixed by their purpose — an ADR, a PRD, an RFC, a runbook, a changelog.
-Those have their own skills and their own shapes; do not force them into the four modes.
-If the project has a skill for the artefact in question, use that instead and leave the docs tree alone.
+Diátaxisは読者のために書かれたドキュメントを対象とする。
+目的によって構造が決まっている文書には適さない。ADR、PRD、RFC、運用手順書、変更履歴。
+これらには固有のスキルと固有の形がある。4つのモードに押し込んではならない。
+その成果物に対応するスキルがプロジェクトにあるなら、そちらを使い、ドキュメントの構成には手を付けない。
 
-## Red flags
+## 危険信号
 
-- A page you cannot name a mode for.
-  It is two pages wearing one filename.
-- "Getting started" that is really an option catalogue.
-  A tutorial that stopped teaching.
-- A reference page with a Step 1.
-  The procedure is hidden where nobody looks for it.
-- An explanation that ends with instructions.
-  The instructions will rot, because nobody maintains procedures they did not expect to find there.
-- Four empty mode directories.
-  The structure is not the goal; serving the four needs is.
-  An empty `tutorials/` is worse than no `tutorials/`.
-- Reorganising without reading the pages.
-  Classification is about what the reader needs from the content, which you cannot know from the filename.
+- モードを言えないページ。
+  1つのファイル名をかぶった2つのページである。
+- 実態がオプションの目録になっている「はじめに」。
+  教えるのをやめたチュートリアルである。
+- 手順1が書かれたリファレンス。
+  誰も探しに来ない場所に手順が隠れている。
+- 指示で終わる説明。
+  その指示は腐る。そこにあると思っていない手順を、誰も保守しないからである。
+- 空のモードディレクトリが4つ。
+  構造を作ることが目的ではなく、4つの必要に応えることが目的である。
+  空の`tutorials/`は、`tutorials/`が無いより悪い。
+- ページを読まずに再編成すること。
+  分類は読者が内容から何を必要とするかの問題であり、それはファイル名からは分からない。

@@ -68,6 +68,9 @@ def main() -> int:
         if name != SKILL.parent.name:
             errors.append(f"name {name!r} != directory {SKILL.parent.name!r}")
 
+    # description が「いつ使うか」を述べているかは判定しない。以前は "use " を
+    # 含むかで見ていたが、それは英語の説明文しか通さない検査だった。文章が要件を
+    # 満たしているかは正規表現で決められる種類のものではない。
     desc = meta.get("description")
     if not isinstance(desc, str) or not desc:
         errors.append("missing required field 'description'")
@@ -75,8 +78,6 @@ def main() -> int:
     else:
         if not 1 <= len(desc) <= 1024:
             errors.append(f"description is {len(desc)} chars, must be 1-1024")
-        if "use " not in desc.lower():
-            errors.append("description should say when to use the skill")
 
     lines = body.count("\n")
     if lines > 500:

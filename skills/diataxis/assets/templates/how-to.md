@@ -1,17 +1,17 @@
-# How to <achieve the reader's goal>
+# <読者の目的>をする方法
 
-<One sentence: what situation this solves.
-Assume the reader knows why they want it.>
+<1文で、どういう状況を解決するのかを書く。
+読者がなぜそれをしたいかは分かっている前提で書く。>
 
-## Steps
+## 手順
 
-1. <Action.>
-2. <Action.>
+1. <操作。>
+2. <操作。>
 
-## Variations
+## 状況による違い
 
-- If <common situation>: <what to do instead>
+- <よくある状況>の場合: <代わりにすること>
 
-## If it fails
+## うまくいかないとき
 
-<The failure people actually hit, and what to do about it.>
+<実際に人がぶつかる失敗と、その対処。>
