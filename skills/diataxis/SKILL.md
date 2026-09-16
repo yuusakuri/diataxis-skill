@@ -57,8 +57,9 @@ Then, for each finding:
    If it resists classification, that is the signal it is two pages.
 2. Mode-mixing — cut the foreign material out and move it to its own mode, leaving a link.
    The commonest case by far is instruction absorbed into reference or explanation; procedures hide there, where nobody looking for a procedure will look.
-3. Missing mode — a real gap in most projects.
-   Missing explanation is the one teams skip and then re-derive in every code review.
+3. Missing mode — only a gap when a reader needs it.
+   Say what that reader would have come for, and leave the mode absent until someone does.
+   Missing explanation is worth raising, because teams skip it and then re-derive it in every code review.
 
 Restructure incrementally.
 A docs tree is read while it is being rearranged, so move one page at a time and keep links working.
@@ -79,6 +80,17 @@ Templates for each mode's index page and a first page are in `assets/templates/`
 
 Two naming rules carry most of the weight, because a name is what a reader navigates by: a how-to guide is titled by the reader's goal ("How to rotate API keys"), never by the machinery ("The rotate command").
 An explanation is titled by its question or topic ("Why deployments are immutable"), never as a task.
+
+## Scope
+
+Organise what you were given.
+A request to sort out a docs folder is not a request to write the pages it does not have.
+
+Do not create a page to complete the set.
+Four half-filled modes serve nobody better than two good ones: an empty `tutorials/` advertises a lesson that does not exist, and a tutorial written to fill a slot teaches nothing anybody asked to learn.
+
+If a mode is missing and you think a reader wants it, name that reader and say what they would have come for.
+Then let the author decide whether to write it.
 
 ## Writing in a mode
 

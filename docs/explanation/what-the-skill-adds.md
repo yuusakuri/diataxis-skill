@@ -1,70 +1,35 @@
 # What the skill adds
 
-Diátaxis is well known, and a capable model can apply it unprompted.
-So the honest question for this skill is not "does it work" but "does it add anything a model does not already do".
+Diátaxis is well known, and a capable model applies it unprompted.
+The skill's value is therefore not the framework but the four rules below, each of which `evals/` checks.
 
-We measured it.
-The answer is: not the framework, but three things around it.
+## Evidence you can argue with
 
-## How it was measured
+The skill requires each judgement to name the lines it rests on.
+"This page is doing three jobs" is an opinion; "lines 3–5 are explanation, 7–10 a procedure, 12–16 a reference table" is something the author can disagree with point by point.
 
-Three realistic prompts were run twice each — once with the skill loaded, once with no skill — by independent agents that had not seen the repository.
-The prompts, fixtures and graders are in [`evals/`](../../evals/).
-Every assertion is checked by a script, so the numbers do not depend on the author's opinion.
+## Refusal to build empty structure
 
-## The first attempt found nothing
+The four mode directories are not the goal.
+A model asked to apply Diátaxis will readily scaffold `tutorials/` and leave it empty, or write a tutorial nobody asked for so that the set looks complete.
+The skill treats a missing mode as a gap only when a reader needs it, and says so instead of filling it.
 
-| Eval | With skill | Without |
-|---|---|---|
-| Restructure a messy docs tree | 6/6 | 6/6 |
-| Diagnose one mixed page | 4/4 | 4/4 |
+## Refusal of plausible non-fixes
 
-Identical.
-Those assertions checked things like "names all four modes" and "proposes splitting the page" — which the model does unaided.
+Adding four `##` headings to a page containing four modes makes it easier to skim and leaves it four modes.
+The skill rejects that as a fix, because the problem is which page the content is on, not how it is signposted.
 
-That result is kept rather than deleted.
-A skill that restates what the model already does is not worth the context it occupies, and assertions that cannot fail cannot tell you which kind you have.
+## A boundary
 
-## The second attempt found three differences
+An architecture decision record, a PRD, an RFC, a runbook and a changelog have shapes fixed by their purpose.
+The skill declines to file them in the four modes, and says which artefact it is instead.
 
-| Eval | With skill | Without |
-|---|---|---|
-| Restructure a messy docs tree | 5/5 | 3/5 |
-| Diagnose one mixed page | 4/4 | 2/4 |
-| Defer on an ADR | 4/4 | not run |
+## Checking these
 
-The assertions that separated them:
+`evals/` holds the prompts, the fixtures and the assertions.
+Each assertion states one of the behaviours above, so a failure is a gap between this page and what the agent did.
+`evals/README.md` has the procedure.
 
-| Assertion | With | Without |
-|---|---|---|
-| Cites line numbers as evidence | pass, both evals | fail, both evals |
-| Refuses to create an empty placeholder page | pass | fail |
-| Does not offer "add some headings" as a fix | pass | fail |
-
-The first row was measured while the repository still bundled a script that
-produced line-number citations.
-That script has since been removed, so the row records what was true then and
-has not been re-measured.
-The other two rows are about the skill's judgement and are unaffected.
-
-## What that means
-
-Resistance to plausible non-fixes.
-The unaided run suggested adding four `##` headings to a four-mode page.
-That makes it easier to skim and leaves it four modes.
-It was also willing to scaffold an empty tutorial directory.
-
-A boundary.
-Asked where an architecture decision should be written down, the skill-loaded run identified it as an ADR and declined to file it as a tutorial, how-to or reference — while still pointing at explanation as a legitimate follow-on page.
-
-## What it did not change
-
-Four assertions passed either way.
-The model already named all four modes, already classified a beginner walkthrough as a tutorial rather than a how-to, already warned that a subject-named file re-accumulates content, and already proposed moving pages incrementally.
-
-## Limits of this measurement
-
-Three prompts, one run each.
-Enough to show a direction, not to put a number on it.
-No unaided run for the ADR case, so that row is unopposed.
-The graders match text with regular expressions, so they can be satisfied by an answer that says the right words; the answers were also read.
+No results are recorded here.
+A number in this file would only be trustworthy if it were regenerated whenever the skill changed, and nothing enforces that.
+Run the evals and read the answers.
