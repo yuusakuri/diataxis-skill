@@ -25,28 +25,16 @@ Both questions are about the reader, not the subject.
 "Caching" is a subject, so it spans all four.
 That is why filing by subject produces the pile.
 
-## Why this framework and not a house style
-
-Two reasons.
+## Why it works
 
 It is decidable.
 Two questions with two answers each give four boxes, and most content lands in one of them without argument.
-A style guide that says "write clearly" gives nobody a way to settle where a page goes.
 
 It is diagnostic.
-Because the modes have different shapes, you can see when a page is mixed: a reference page with a "Step 1" in it, an explanation that ends in a numbered list.
+Because the modes have different shapes, a mixed page is visible: a reference page with a "Step 1" in it, an explanation that ends in a numbered list.
 That is the failure this skill is aimed at.
 
 ## What it does not cover
 
-Diátaxis organises documentation written for readers.
-It does not govern documents whose shape is set by their purpose — an architecture decision record, a product requirements document, an RFC, a runbook, a changelog.
-Those have their own conventions, and forcing them into four modes loses what makes them useful.
-
-The skill defers on those rather than classifying them.
-
-## Source
-
-Diátaxis is the work of Daniele Procida.
-The authoritative description is at [diataxis.fr](https://diataxis.fr/).
-This repository applies it; it does not restate it.
+Diátaxis organises documentation written for readers, so it does not govern documents whose shape is set by their purpose — an architecture decision record, a product requirements document, an RFC, a runbook, a changelog.
+Forcing those into four modes loses what makes them useful, and the skill defers on them rather than classifying them.

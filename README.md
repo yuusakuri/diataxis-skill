@@ -14,37 +14,18 @@ Diátaxis sorts documentation by what the reader needs when they arrive:
 The skill applies that split.
 It decides where a page belongs, sets up a docs tree, and finds pages doing two jobs at once.
 
-## Table of Contents
-
-- [Install](#install)
-- [Usage](#usage)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Install
 
-```bash
-/plugin marketplace add yuusakuri/diataxis-skill
-/plugin install diataxis@diataxis-skill
-```
-
-For other agents, copy `skills/diataxis/` into the directory your agent reads.
 See [install the skill](docs/how-to/install-the-skill.md).
 
 ## Usage
 
-The skill triggers on questions of documentation structure, whether or not Diátaxis is named.
-Ask an agent where a page belongs, or why a docs folder is hard to navigate.
+The skill triggers on documentation structure, whether or not Diátaxis is named.
+It answers questions — where does this page belong, why is this folder hard to navigate — and it carries out requests: sort out the docs folder, split this page, decide whether we need a tutorial here.
 
-## Documentation
+## Why Diátaxis
 
-[`docs/`](docs/) is organised by Diátaxis, so the framework is visible in the directory names.
-
-| | |
-|---|---|
-| [How-to](docs/how-to/install-the-skill.md) | Install the skill |
-| [Explanation](docs/explanation/why-diataxis.md) | Why Diátaxis, and what it does not cover |
+See [why Diátaxis](docs/explanation/why-diataxis.md), which also covers what it does not apply to.
 
 ## Contributing
 
@@ -53,4 +34,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 MIT, see [LICENSE](LICENSE).
-Diátaxis is the work of Daniele Procida and is applied here, not reproduced.
