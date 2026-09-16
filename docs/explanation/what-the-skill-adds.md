@@ -1,9 +1,7 @@
 # What the skill adds
 
 Diátaxis is well known, and a capable model applies it unprompted.
-So the question this page answers is not whether the framework works, but what the skill contributes over a model that already knows it.
-
-Four things, each of which `evals/` checks.
+The skill's value is therefore not the framework but the four rules below, each of which `evals/` checks.
 
 ## Evidence you can argue with
 
@@ -28,8 +26,8 @@ The skill declines to file them in the four modes, and says which artefact it is
 
 ## Checking these
 
-`evals/` holds the prompts, the fixtures and the graders.
-Each prompt is run twice, once with the skill and once without, by an agent that has not read this repository.
+`evals/` holds the prompts, the fixtures and the assertions.
+Each assertion states one of the behaviours above, so a failure is a gap between this page and what the agent did.
 `evals/README.md` has the procedure.
 
 No results are recorded here.

@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Discriminating assertions: what does the SKILL add over a model that
-already knows Diátaxis?
+"""Grade an agent's answers against what the skill requires of them.
 
-The assertions in grade_baseline_assertions.py passed identically with and
-without the skill, so they measured the model's prior knowledge of Diátaxis
-rather than the skill. These target what the skill actually supplies: citing
-the lines a judgement rests on, the subtle tutorial/how-to call, the rule
-against building pages to fill empty modes, the restructuring procedure, and
-the deferral boundary.
+Each assertion states a behaviour the skill asks for: citing the lines a
+judgement rests on, the subtle tutorial/how-to call, the rule against building
+pages to fill empty modes, the restructuring procedure, the deferral boundary,
+and not inventing pages nobody asked for.
+
+A failing assertion is a gap between what SKILL.md says and what the agent did.
 """
 from __future__ import annotations
 import json, re
@@ -15,13 +14,13 @@ from pathlib import Path
 
 import os, sys
 
-# Directory holding the answers, laid out as <eval>/<config>/outputs/answer.md.
+# Directory holding the answers, laid out as <eval>/outputs/answer.md.
 # Pass it as the first argument, or set DIATAXIS_EVAL_RUNS.
 WS = Path(sys.argv[1] if len(sys.argv) > 1
           else os.environ.get("DIATAXIS_EVAL_RUNS", "evals/runs"))
 
-def load(ev, cfg):
-    p = WS / ev / cfg / "outputs" / "answer.md"
+def load(ev):
+    p = WS / ev / "outputs" / "answer.md"
     return p.read_text(encoding="utf-8").lower() if p.is_file() else None
 
 A = {
@@ -52,9 +51,9 @@ A = {
  ],
  "eval-3-no-invented-pages": [
   ("does not create a tutorial page",
-   lambda t: not bool(re.search(r"(create|add|write|new)\s+(a\s+)?(`?tutorials?/|tutorial page|tutorial\b)", t))),
+   lambda t: not bool(re.search(r"(create|add|write|new|introduce)\s+(an?\s+)?(`?tutorials?/|tutorial page|tutorial\b)", t))),
   ("does not create an explanation page",
-   lambda t: not bool(re.search(r"(create|add|write|new)\s+(a\s+)?(`?explanations?/|explanation page)", t))),
+   lambda t: not bool(re.search(r"(create|add|write|new|introduce)\s+(an?\s+)?(`?explanations?/|explanation page)", t))),
   ("says the absent modes are not a gap here",
    lambda t: bool(re.search(r"not (a )?gap|nothing here (asks|needs|calls)|no reader|don'?t (add|create)|"
                             r"only (add|create) .{0,40}(when|if) (a reader|someone)", t))),
@@ -73,35 +72,37 @@ A = {
  ],
 }
 
-rows=[]
+rows = []
 for ev, asserts in A.items():
-    row={"eval":ev}
-    for cfg in ("with_skill","without_skill"):
-        t=load(ev,cfg)
-        if t is None: row[cfg]=None; continue
-        row[cfg]=[(n, bool(f(t))) for n,f in asserts]
-    rows.append(row)
+    t = load(ev)
+    rows.append({"eval": ev,
+                 "results": None if t is None else [(n, bool(f(t))) for n, f in asserts]})
 
-print(f"{'eval':<24} {'with skill':>12} {'baseline':>12}")
-print("-"*50)
-tw=nw=tb=nb=0
+print(f"{'eval':<28} {'passed':>10}")
+print("-" * 40)
+total = count = 0
 for r in rows:
-    w,b=r["with_skill"],r["without_skill"]
-    ws=f"{sum(p for _,p in w)}/{len(w)}" if w else "—"
-    bs=f"{sum(p for _,p in b)}/{len(b)}" if b else "—"
-    if w: tw+=sum(p for _,p in w); nw+=len(w)
-    if b: tb+=sum(p for _,p in b); nb+=len(b)
-    print(f"{r['eval']:<24} {ws:>12} {bs:>12}")
-print("-"*50)
-print(f"{'TOTAL':<24} {f'{tw}/{nw}':>12} {f'{tb}/{nb}':>12}")
-print("\nper-assertion (with / baseline):")
+    res = r["results"]
+    if res is None:
+        print(f"{r['eval']:<28} {'no answer':>10}")
+        continue
+    passed = sum(p for _, p in res)
+    total += passed
+    count += len(res)
+    print(f"{r['eval']:<28} {f'{passed}/{len(res)}':>10}")
+print("-" * 40)
+print(f"{'TOTAL':<28} {f'{total}/{count}':>10}")
+
+print("\nper assertion:")
 for r in rows:
     print(f"\n  {r['eval']}")
-    w,b=r["with_skill"],r["without_skill"]
-    for i,(n,_) in enumerate(A[r["eval"]]):
-        wm="PASS" if w and w[i][1] else ("FAIL" if w else "—")
-        bm="PASS" if b and b[i][1] else ("FAIL" if b else "—")
-        mark="  <-- differs" if (w and b and w[i][1]!=b[i][1]) else ""
-        print(f"    {wm:<5} {bm:<5} {n}{mark}")
-json.dump({r["eval"]:{k:v for k,v in r.items() if k!="eval"} for r in rows},
-          open(WS/"grading-discriminating.json","w"), indent=2, default=str)
+    if r["results"] is None:
+        print("    no answer found")
+        continue
+    for name, ok in r["results"]:
+        print(f"    {'PASS' if ok else 'FAIL':<5} {name}")
+
+missing = [r["eval"] for r in rows if r["results"] is None]
+json.dump({r["eval"]: r["results"] for r in rows},
+          open(WS / "grading.json", "w"), indent=2, default=str)
+sys.exit(1 if missing or total < count else 0)

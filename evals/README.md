@@ -1,24 +1,22 @@
 # Evaluations
 
-These check what the skill changes about an agent's answer.
-They are not unit tests: each one is a prompt given to an agent twice, once with the skill loaded and once without, and the two answers are compared.
+These check whether an agent loaded with the skill does what the skill says.
+Each assertion states a behaviour `SKILL.md` asks for.
+A failing assertion is a gap between the skill and what the agent did.
 
-## Running one
+## Running
 
-1. Give an agent the prompt from `evals.json`, with the fixture directory named in `files` as its working material.
-2. Do it twice: once with `skills/diataxis/` installed, once with no skill.
-3. Save each answer as `<runs>/<eval-name>/<config>/outputs/answer.md`, where `<config>` is `with_skill` or `without_skill`.
+1. Load `skills/diataxis/` into an agent that has not read this repository.
+2. Give it the prompt from `evals.json`, with the fixture directory named in `files` as its working material.
+3. Save the answer as `<runs>/<eval-name>/outputs/answer.md`.
 4. Grade:
 
 ```bash
-python3 evals/results/grade_discriminating.py <runs>
-python3 evals/results/grade_baseline_assertions.py <runs>
+python3 evals/results/grade.py <runs>
 ```
 
 The runs directory defaults to `evals/runs`, or set `DIATAXIS_EVAL_RUNS`.
-
-Use an agent that has not read this repository.
-An agent that has read the skill cannot produce a without-skill answer.
+Exit is 0 only when every assertion passes and every eval has an answer.
 
 ## What is here
 
@@ -26,9 +24,12 @@ An agent that has read the skill cannot produce a without-skill answer.
 |---|---|
 | `evals.json` | The prompts and what each one is looking for |
 | `fixtures/` | The docs trees the prompts operate on |
-| `results/grade_discriminating.py` | Assertions aimed at what the skill supplies |
-| `results/grade_baseline_assertions.py` | An earlier set, kept because it separated nothing |
+| `results/grade.py` | The assertions |
 
-`grade_baseline_assertions.py` is kept deliberately.
-It checked things like "names all four modes", which the model does unaided, so it scored identically both ways.
-An assertion that cannot fail cannot tell you whether a skill is worth its context.
+## Writing an assertion
+
+Assert a behaviour the skill asks for, not knowledge the model already has.
+"Names all four modes" passes without the skill loaded, so it measures nothing and cannot fail.
+
+The graders match text with regular expressions, so an answer can satisfy one by saying the right words.
+Read the answers as well as the score.
