@@ -1,6 +1,6 @@
 ---
 name: diataxis
-description: Organise documentation with the Diátaxis framework - decide whether a page is a tutorial, how-to guide, reference, or explanation, scaffold a docs tree around those four modes, audit existing docs for mode-mixing, and write each page in the mode it belongs to. Use whenever documentation structure is in question: starting a docs/ directory, deciding where a new page goes, a docs folder that has grown into a pile of unrelated markdown, a README that has swollen past what anyone reads, or a request to reorganise, split, restructure, or audit documentation. Use it even when Diátaxis is not named - "where should this doc live", "our docs are a mess", "split up this guide" are all this skill.
+description: 'Organise documentation with the Diátaxis framework - decide whether a page is a tutorial, how-to guide, reference, or explanation, scaffold a docs tree around those four modes, audit existing docs for mode-mixing, and write each page in the mode it belongs to. Use whenever documentation structure is in question: starting a docs/ directory, deciding where a new page goes, a docs folder that has grown into a pile of unrelated markdown, a README that has swollen past what anyone reads, or a request to reorganise, split, restructure, or audit documentation. Use it even when Diátaxis is not named - "where should this doc live", "our docs are a mess", "split up this guide" are all this skill.'
 license: MIT
 metadata:
   framework: "Diátaxis (https://diataxis.fr/)"

@@ -14,6 +14,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent.parent
 SKILL = ROOT / "skills" / "diataxis" / "SKILL.md"
 
@@ -38,16 +40,27 @@ def main() -> int:
         return 1
     fm, body = text[4:end], text[end + 5:]
 
-    keys = {m.group(1) for m in re.finditer(r"^([a-zA-Z-]+):", fm, re.M)}
-    for k in keys:
+    # The frontmatter is YAML, so read it with a YAML parser. Reading it with
+    # regular expressions accepts files no agent can load: an unquoted value
+    # containing ": " parses as a nested mapping and the whole block fails.
+    try:
+        meta = yaml.safe_load(fm)
+    except yaml.YAMLError as e:
+        print(f"error: frontmatter is not valid YAML — {e}", file=sys.stderr)
+        return 1
+    if not isinstance(meta, dict):
+        print("error: frontmatter is not a mapping", file=sys.stderr)
+        return 1
+
+    for k in meta:
         if k not in ALLOWED:
             errors.append(f"unknown frontmatter key {k!r}")
 
-    name_m = re.search(r"^name:\s*(.+)$", fm, re.M)
-    if not name_m:
+    name = meta.get("name")
+    if not isinstance(name, str) or not name:
         errors.append("missing required field 'name'")
+        name = ""
     else:
-        name = name_m.group(1).strip().strip("\"'")
         if not NAME_RE.match(name):
             errors.append(f"name {name!r} must be lowercase alphanumeric with single hyphens")
         if len(name) > 64:
@@ -55,11 +68,11 @@ def main() -> int:
         if name != SKILL.parent.name:
             errors.append(f"name {name!r} != directory {SKILL.parent.name!r}")
 
-    desc_m = re.search(r"^description:\s*(.+)$", fm, re.M)
-    if not desc_m:
+    desc = meta.get("description")
+    if not isinstance(desc, str) or not desc:
         errors.append("missing required field 'description'")
+        desc = ""
     else:
-        desc = desc_m.group(1).strip().strip("\"'")
         if not 1 <= len(desc) <= 1024:
             errors.append(f"description is {len(desc)} chars, must be 1-1024")
         if "use " not in desc.lower():
