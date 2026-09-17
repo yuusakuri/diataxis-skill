@@ -40,9 +40,6 @@ def main() -> int:
         return 1
     fm, body = text[4:end], text[end + 5:]
 
-    # The frontmatter is YAML, so read it with a YAML parser. Reading it with
-    # regular expressions accepts files no agent can load: an unquoted value
-    # containing ": " parses as a nested mapping and the whole block fails.
     try:
         meta = yaml.safe_load(fm)
     except yaml.YAMLError as e:
@@ -68,9 +65,6 @@ def main() -> int:
         if name != SKILL.parent.name:
             errors.append(f"name {name!r} != directory {SKILL.parent.name!r}")
 
-    # description が「いつ使うか」を述べているかは判定しない。以前は "use " を
-    # 含むかで見ていたが、それは英語の説明文しか通さない検査だった。文章が要件を
-    # 満たしているかは正規表現で決められる種類のものではない。
     desc = meta.get("description")
     if not isinstance(desc, str) or not desc:
         errors.append("missing required field 'description'")

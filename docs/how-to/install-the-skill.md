@@ -1,30 +1,29 @@
 # スキルのインストール方法
 
-このスキルは[Agent Skills](https://agentskills.io/specification)の形式に従ったただのディレクトリである。
-インストールとは、そのディレクトリをエージェントが読む場所に置くことを指す。
+このスキルは[Agent Skills](https://agentskills.io/specification)の形式に従ったディレクトリです。エージェントが読む場所にそのディレクトリを置けば、インストールは完了します。
 
-## フォルダをコピーする
+## ディレクトリをコピーする
+
+リポジトリを取得し、`skills/diataxis`をコピーします。
 
 ```bash
 git clone https://github.com/yuusakuri/diataxis-skill
-cp -r diataxis-skill/skills/diataxis <target>/
+cp -r diataxis-skill/skills/diataxis <コピー先>/
 ```
 
-`<target>`は、使っているエージェントが読むディレクトリである。
+コピー先は、使っているエージェントによって次のように決まります。
 
-| 置き場所 | 読むエージェント |
+| コピー先 | 読むエージェント |
 | --- | --- |
-| `.agents/skills/` | Codex、Gemini CLI、OpenCode、Copilot、CommandCode |
+| `.agents/skills/` | Codex、Gemini CLI、OpenCode、GitHub Copilot、CommandCode |
 | `.claude/skills/` | Claude Code |
 | `.cursor/skills/` | Cursor |
 
-`.agents/skills/`が共通の置き場である。
-Claude CodeとCursorはここを読まないので、これらを使う場合はそれぞれのディレクトリにも書き込む。
+`.agents/skills/`は共通の置き場所です。Claude CodeとCursorはこの場所を読まないため、これらを使うときはそれぞれのディレクトリにもコピーしてください。
 
-## プラグインとして入れる
+## プラグインとして取得する
 
-プラグイン機構を持つエージェントなら、コピーせずに取得できる。
-Claude Codeの場合は次のとおり。
+プラグインの仕組みを持つエージェントでは、コピーの代わりに取得できます。Claude Codeでは次のコマンドを実行します。
 
 ```bash
 /plugin marketplace add yuusakuri/diataxis-skill
@@ -33,8 +32,8 @@ Claude Codeの場合は次のとおり。
 
 ## 動作を確認する
 
-エージェントに「docsフォルダがぐちゃぐちゃなんだけど、どう置くべき？」と尋ねる。
-チュートリアル、ハウツーガイド、リファレンス、説明という言葉で答えが返るはずである。
+エージェントに「docsフォルダが散らかっているので、どこに何を置けばいいか教えてほしい」と尋ねます。
 
-返らない場合、スキルが読み込まれていない。
-セッションを再起動し、コピー先のディレクトリに`diataxis/SKILL.md`があることを確認する。
+Tutorial、How-to guide、Reference、Explanationという言葉を使った答えが返れば、スキルは読み込まれています。
+
+返らないときは、コピー先のディレクトリに`diataxis/SKILL.md`があることを確認し、セッションを再起動してください。
