@@ -24,14 +24,11 @@ EVALS = ROOT / "evals"
 REQUIRED_BUNDLED = [
     "references/four-modes.md",
     "references/how-to-restructure.md",
-    "assets/templates/tutorial.md",
-    "assets/templates/how-to.md",
-    "assets/templates/reference.md",
-    "assets/templates/explanation.md",
-    "assets/templates/index.md",
 ]
 
-MAX_BODY_LINES = 500  # CONTRIBUTING.md keeps SKILL.md short; details go to references/.
+# SKILL.md is the entry point, not the manual. Anything longer than this belongs
+# in references/, which the agent reads only when it needs it.
+MAX_BODY_LINES = 120
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 BUNDLED_REF_RE = re.compile(r"`((?:references|scripts|assets)/[\w./-]+)`")
@@ -82,8 +79,7 @@ def check_manifests(errors: list[str]) -> None:
 
 def check_links(errors: list[str]) -> None:
     for md in ROOT.rglob("*.md"):
-        # Templates link to paths the reader will create, not to paths here.
-        if ".git" in md.parts or "results" in md.parts or "templates" in md.parts:
+        if ".git" in md.parts or "results" in md.parts:
             continue
         for target in LINK_RE.findall(md.read_text(encoding="utf-8")):
             if target.startswith(("http://", "https://", "#", "mailto:")):
