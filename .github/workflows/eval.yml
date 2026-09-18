@@ -1,0 +1,41 @@
+name: eval
+
+# Eval runs call the model, so they cost money and take minutes. They are not
+# part of the per-push checks: run them by hand when the skill's judgement
+# changes, and on a schedule to catch drift when a new model ships.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+jobs:
+  eval:
+    name: the skill behaves as SKILL.md says
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install -g @anthropic-ai/claude-code
+      - name: run the suite against the skill and a no-skill baseline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude plugin eval . \
+            --trust-plugin \
+            --scaffold \
+            --json results.json \
+            --threshold 0.8 \
+            --model claude-sonnet-5 \
+            --judge-model claude-haiku-4-5 \
+            --no-publish \
+            --max-cost-usd 20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: |
+            results.json
+            evals/results/
