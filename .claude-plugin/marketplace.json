@@ -10,12 +10,12 @@
       "name": "diataxis",
       "source": "./",
       "displayName": "Diátaxis",
-      "description": "Classify, scaffold, and audit documentation with the Diátaxis framework.",
+      "description": "Classify documentation by the reader need it answers, and audit existing docs for mode-mixing, with the Diátaxis framework.",
       "version": "1.0.0",
       "author": { "name": "yuusakuri" },
       "homepage": "https://github.com/yuusakuri/diataxis-skill",
       "repository": "https://github.com/yuusakuri/diataxis-skill",
-      "license": "MIT",
+      "license": "MIT AND CC-BY-SA-4.0",
       "category": "documentation",
       "keywords": ["documentation", "diataxis", "docs", "technical-writing"]
     }

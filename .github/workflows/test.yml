@@ -7,13 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  skill:
-    name: SKILL.md conforms to the spec
+  validate:
+    name: manifests and skills conform to the spec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install -g @anthropic-ai/claude-code
+      - name: validate the marketplace and plugin manifests
+        run: claude plugin validate . --strict
+      - name: validate the skills
+        run: claude plugin validate ./skills --strict
+
+  repo:
+    name: repository-specific checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pyyaml
-      - run: python3 tests/validate_skill.py
+      - run: python3 tests/check_repo.py
