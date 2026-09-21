@@ -1,0 +1,31 @@
+NOTICE
+
+This repository applies the Diátaxis documentation framework.
+
+Diátaxis is the work of Daniele Procida and contributors, published at
+https://diataxis.fr/ under the Creative Commons Attribution-ShareAlike 4.0
+International licence (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The four modes (tutorial, how-to guide, reference, explanation), the two axes
+that separate them (action/cognition, acquisition/application), and the
+characterisations of what each mode owes its reader come from that work. The
+following files adapt and translate that material into Japanese, reorganised
+and rewritten for use by an agent, with added material of our own:
+
+  skills/diataxis/SKILL.md
+  skills/diataxis/references/four-modes.md
+  skills/diataxis/references/how-to-restructure.md
+  skills/diataxis/assets/templates/
+  docs/explanation/why-diataxis.md
+
+Those files are made available under CC BY-SA 4.0, the same licence as the
+material they adapt. They are modified from the original: the wording is not a
+translation of any particular page, the framing and the examples are ours, and
+the operational rules a reader will find in them are not part of Diátaxis
+itself.
+
+Everything else in this repository — the tests, the eval suite, the manifests,
+the remaining documentation — is under the MIT licence in LICENSE.
+
+Neither Daniele Procida nor the Diátaxis project endorses this repository.

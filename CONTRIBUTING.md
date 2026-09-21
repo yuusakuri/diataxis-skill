@@ -4,19 +4,33 @@
 
 4つのモードに関わる部分を変更するときは、先に一次情報である[Diátaxis](https://diataxis.fr/)を読んでください。このリポジトリはDiátaxisを適用するものであり、解釈を加えるものではありません。
 
-`SKILL.md`は500行未満に保ちます。詳細は`references/`に置いてください。エージェントは必要になったときだけそれを読みます。
+`SKILL.md`は120行未満に保ちます。入口として必要なことだけを書き、詳細は`references/`に置いてください。エージェントは必要になったときだけそれを読みます。
 
-変更したら、次のコマンドで検証します。
+見出しの雛形を配らないでください。Diátaxisが規定するのは各モードが応える読者ニーズと書き方であって、固定の節構成ではありません。雛形があると、中身のない節が機械的に生まれます。
+
+変更したら、次の2つで検証します。
 
 ```bash
-python3 tests/validate_skill.py
+claude plugin validate . --strict
+claude plugin validate ./skills --strict
+python3 tests/check_repo.py
 ```
 
-このコマンドは、frontmatterをYAMLとして解析できること、[Agent Skills](https://agentskills.io/specification)が要求するフィールドがあること、`name`とディレクトリ名が一致すること、`SKILL.md`が参照する同梱ファイルが実在することを確認します。
+`claude plugin validate`は仕様準拠の確認です。frontmatterの形式、必須フィールド、`name`とディレクトリ名の一致などは、こちらが正です。
+
+`tests/check_repo.py`はこのリポジトリ固有の確認です。同梱ファイルの実在、2つのmanifestの整合、Markdownの相対リンク、evalの構造を見ます。
 
 ## スキルの判断を変更する
 
-スキルが下す判断を変えるときは、変更前なら失敗したはずの判定を`evals/`に足してください。どの判定にも引っかからない変更は、判断ではなく文言の変更です。
+スキルが下す判断を変えるときは、変更前なら失敗したはずのcaseを`evals/diataxis/`に足してください。どの採点器にも引っかからない変更は、判断ではなく文言の変更です。
+
+```bash
+claude plugin eval .
+```
+
+`Δ`が0のcaseは、スキルを読み込まなくても同じ結果になるcaseです。測っている対象を見直してください。
+
+`SKILL.md`や`references/`に載っている例をcaseの題材にしないでください。例の再現を測ることになります。
 
 ## 問題を報告する
 
